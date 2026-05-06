@@ -127,6 +127,80 @@
     .lede { color: var(--text-muted); max-width: 640px; margin-top: 0.5rem; }
 
     /* =========================================================
+       Collapsible steps (<details> natif) + toolbar
+       ========================================================= */
+    .toolbar {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: -16px;
+    }
+    .toolbar__btn {
+      font: 500 0.85rem/1 var(--font-sans);
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: color .15s, border-color .15s, background .15s;
+    }
+    .toolbar__btn:hover { color: var(--accent); border-color: var(--accent); }
+    .toolbar__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .step-collapsible { border-top: 1px solid var(--border); padding-top: 8px; }
+    .step-collapsible > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 36px 12px 0;
+      position: relative;
+      user-select: none;
+      border-radius: var(--radius-sm);
+    }
+    .step-collapsible > summary::-webkit-details-marker { display: none; }
+    .step-collapsible > summary:hover .step-collapsible__title { color: var(--accent); }
+    .step-collapsible > summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+    .step-collapsible__title {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--text);
+      transition: color .15s;
+    }
+    @media (min-width: 768px) {
+      .step-collapsible__title { font-size: 1.875rem; }
+    }
+    .step-collapsible__chevron {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(0deg);
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: transform .2s ease, color .15s;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .step-collapsible[open] > summary .step-collapsible__chevron {
+      transform: translateY(-50%) rotate(90deg);
+      color: var(--accent);
+    }
+    .step-collapsible__body { padding-top: 8px; }
+    @media (prefers-reduced-motion: reduce) {
+      .step-collapsible__chevron { transition: none; }
+    }
+
+    /* =========================================================
        Cards
        ========================================================= */
     .card {
@@ -311,12 +385,22 @@
     </div>
   </header>
 
+  <!-- Toolbar : tout déplier / tout replier -->
+  <div class="toolbar">
+    <button type="button" class="toolbar__btn" id="toggleAll" aria-expanded="false">Tout déplier</button>
+  </div>
+
   <!-- ============================================================
        Étape 1 — Installer & s'abonner
        ============================================================ -->
   <section class="container" aria-labelledby="step1-title">
-    <span class="kicker">Étape 1</span>
-    <h2 id="step1-title">Installer &amp; s'abonner</h2>
+    <details class="step-collapsible" open>
+      <summary>
+        <span class="kicker">Étape 1</span>
+        <h2 id="step1-title" class="step-collapsible__title">Installer &amp; s'abonner</h2>
+        <span class="step-collapsible__chevron" aria-hidden="true">›</span>
+      </summary>
+      <div class="step-collapsible__body">
     <p class="lede">15 minutes chrono. Tu auras Claude prêt à l'emploi sur ton Mac et dans ton navigateur.</p>
 
     <h3>1.1 — Prendre l'abonnement Claude Pro</h3>
@@ -358,14 +442,21 @@
       <li><strong>20-25 min — Connecte un outil.</strong> Settings → Connecteurs → ajoute <strong>Google Drive</strong> ou <strong>Gmail</strong> selon ce que tu utilises le plus.</li>
       <li><strong>25-30 min — Essaie Claude dans Excel.</strong> Ouvre un classeur (cours, suivi de stage), demande <em>« Résume chaque onglet en 2 phrases. »</em> (cf. encart Excel plus bas).</li>
     </ol>
+      </div>
+    </details>
   </section>
 
   <!-- ============================================================
        Étape 2 — Comprendre l'écosystème
        ============================================================ -->
   <section class="container" aria-labelledby="step2-title">
-    <span class="kicker">Étape 2</span>
-    <h2 id="step2-title">Comprendre l'écosystème</h2>
+    <details class="step-collapsible">
+      <summary>
+        <span class="kicker">Étape 2</span>
+        <h2 id="step2-title" class="step-collapsible__title">Comprendre l'écosystème</h2>
+        <span class="step-collapsible__chevron" aria-hidden="true">›</span>
+      </summary>
+      <div class="step-collapsible__body">
     <p class="lede">Quatre "Claude" différents, qui partagent ton compte et tes données. Sache lequel utiliser quand.</p>
 
     <div class="ecosystem">
@@ -403,14 +494,21 @@
     <div class="tip">
       <strong>À retenir :</strong> Cowork n'est pas une app séparée. C'est <em>un mode</em> dans Claude Desktop. Tu n'as rien à installer en plus.
     </div>
+      </div>
+    </details>
   </section>
 
   <!-- ============================================================
        Étape 3 — Configurer ton Claude
        ============================================================ -->
   <section class="container" aria-labelledby="step3-title">
-    <span class="kicker">Étape 3</span>
-    <h2 id="step3-title">Configurer ton Claude</h2>
+    <details class="step-collapsible">
+      <summary>
+        <span class="kicker">Étape 3</span>
+        <h2 id="step3-title" class="step-collapsible__title">Configurer ton Claude</h2>
+        <span class="step-collapsible__chevron" aria-hidden="true">›</span>
+      </summary>
+      <div class="step-collapsible__body">
     <p class="lede">Quatre leviers à connaître : <strong>Compétences</strong>, <strong>Connecteurs</strong> et <strong>Plugins</strong> (les 3 onglets du Répertoire), plus les <strong>Instructions personnalisées</strong> qui se règlent ailleurs.</p>
 
     <!-- 3a Compétences -->
@@ -524,14 +622,21 @@
     <p>
       Le fichier projet <em>complète</em> le fichier global. Mets dans le global tes conventions perso ("anti-yes-man", "commenter plutôt qu'optimiser") et dans le projet le contexte du repo (stack, conventions, scripts à connaître).
     </p>
+      </div>
+    </details>
   </section>
 
   <!-- ============================================================
        Étape 4 — Agent vs chatbot, premier Cowork
        ============================================================ -->
   <section class="container" aria-labelledby="step4-title">
-    <span class="kicker">Étape 4</span>
-    <h2 id="step4-title">Agent vs chatbot — premier Cowork</h2>
+    <details class="step-collapsible">
+      <summary>
+        <span class="kicker">Étape 4</span>
+        <h2 id="step4-title" class="step-collapsible__title">Agent vs chatbot — premier Cowork</h2>
+        <span class="step-collapsible__chevron" aria-hidden="true">›</span>
+      </summary>
+      <div class="step-collapsible__body">
     <p class="lede">La marche cognitive la plus rentable à passer en 2026 : comprendre ce qui change quand l'IA <em>agit</em> au lieu de juste <em>répondre</em>.</p>
 
     <div class="grid-2">
@@ -626,14 +731,21 @@ Ne fais rien tant que nous ne sommes pas alignés.</pre>
     <div class="tip">
       <strong>Posture clé :</strong> tu n'es pas spectateur. Cowork te demandera des validations, parfois plusieurs fois. Lis ce qu'il propose avant de cliquer "approuver". L'agent vaut ce que tu acceptes de relire.
     </div>
+      </div>
+    </details>
   </section>
 
   <!-- ============================================================
        Étape 5 — Workflow de Papa
        ============================================================ -->
   <section class="container" aria-labelledby="step5-title">
-    <span class="kicker">Étape 5</span>
-    <h2 id="step5-title">Mon workflow — outil par tâche</h2>
+    <details class="step-collapsible">
+      <summary>
+        <span class="kicker">Étape 5</span>
+        <h2 id="step5-title" class="step-collapsible__title">Mon workflow — outil par tâche</h2>
+        <span class="step-collapsible__chevron" aria-hidden="true">›</span>
+      </summary>
+      <div class="step-collapsible__body">
     <p class="lede">La règle d'or : <strong>outil par tâche, pas tâche par outil</strong>. Chaque IA est meilleure quelque part. Voici l'arbitrage que j'utilise.</p>
 
     <div class="table-wrap">
@@ -713,6 +825,8 @@ Ne fais rien tant que nous ne sommes pas alignés.</pre>
       <li><strong>GPT Image 2</strong> (gratuit) : visuel de couverture pour le livrable, avec le titre intégré dans l'image.</li>
       <li><strong>Cowork</strong> : tu fais générer la version finale Word/Markdown du livrable dans ton dossier.</li>
     </ol>
+      </div>
+    </details>
   </section>
 
   <!-- ============================================================
@@ -851,6 +965,28 @@ Liens / contenus que je te fournis : [colle]</pre>
     <p class="footer__date">Mercredi 06/05/2026</p>
     <p>Mode d'emploi vivant — relis-le quand tu ajoutes une compétence ou un connecteur.</p>
   </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('toggleAll');
+      if (!btn) return;
+      var steps = document.querySelectorAll('.step-collapsible');
+      function syncLabel() {
+        var allOpen = Array.prototype.every.call(steps, function (s) { return s.open; });
+        btn.textContent = allOpen ? 'Tout replier' : 'Tout déplier';
+        btn.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
+      }
+      btn.addEventListener('click', function () {
+        var allOpen = Array.prototype.every.call(steps, function (s) { return s.open; });
+        Array.prototype.forEach.call(steps, function (s) { s.open = !allOpen; });
+        syncLabel();
+      });
+      Array.prototype.forEach.call(steps, function (s) {
+        s.addEventListener('toggle', syncLabel);
+      });
+      syncLabel();
+    })();
+  </script>
 
 </body>
 </html>
