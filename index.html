@@ -321,17 +321,18 @@
 
     <h3>1.1 — Prendre l'abonnement Claude Pro</h3>
     <ol class="steps">
-      <li>Va sur <code>claude.ai</code> et crée un compte (Google ou e-mail).</li>
-      <li>Settings → <strong>Plans &amp; Billing</strong> → choisis <strong>Pro</strong> (~20 $/mois).</li>
+      <li>Va sur <code>claude.ai</code> (ou <code>claude.com</code>, c'est le même service) et crée un compte (Google ou e-mail).</li>
+      <li>Settings → <strong>Plans &amp; Billing</strong> → choisis <strong>Pro</strong>.</li>
+      <li>Tarif : <strong>20 $/mois</strong> en mensuel, ou <strong>17 $/mois</strong> si tu prends à l'année (~36 $ d'économisés sur 12 mois).</li>
       <li>Le plan Pro débloque : modèle Opus 4.7, Projects, Cowork, plus de Skills, plus de Connecteurs, quotas confortables.</li>
     </ol>
     <div class="tip">
-      <strong>Astuce coût :</strong> tu n'as pas besoin de garder ChatGPT Plus en parallèle. Pour les visuels avec texte (GPT Image 2), le <strong>plan gratuit ChatGPT</strong> suffit largement à un usage étudiant. Pour la veille temps réel via Grok, idem : version gratuite sur <code>grok.com</code> ou inclus dans X si tu y es. Cible réaliste : <strong>~20 $/mois</strong> pour Claude Pro, le reste en gratuit.
+      <strong>Astuce coût :</strong> tu n'as pas besoin de garder ChatGPT Plus en parallèle. Pour les visuels avec texte (GPT Image 2), le <strong>plan gratuit ChatGPT</strong> suffit largement à un usage étudiant. Pour la veille temps réel via Grok, idem : version gratuite sur <code>grok.com</code> ou inclus dans X si tu y es. Cible réaliste : <strong>~17-20 $/mois</strong> pour Claude Pro, le reste en gratuit.
     </div>
 
     <h3>1.2 — Installer Claude Desktop sur Mac</h3>
     <ol class="steps">
-      <li>Va sur <code>claude.ai/download</code> et télécharge la version macOS (Apple Silicon ou Intel selon ton Mac).</li>
+      <li>Va sur <code>claude.com/download</code> (ou <code>claude.ai/download</code>) et télécharge la version macOS.</li>
       <li>Ouvre le <code>.dmg</code>, glisse Claude.app dans <strong>Applications</strong>.</li>
       <li>Lance Claude depuis Spotlight (<kbd>⌘</kbd> + <kbd>Espace</kbd>, tape "Claude").</li>
       <li>Connecte-toi avec le même compte que <code>claude.ai</code>. Tout est synchronisé (conversations, Projects, Skills).</li>
@@ -342,9 +343,21 @@
     <ul>
       <li><strong>Sidebar gauche</strong> : tes conversations récentes et tes Projects.</li>
       <li><strong>Sélecteur de modèle</strong> (en haut de la zone de chat) : Sonnet par défaut, bascule sur Opus pour les tâches complexes.</li>
+      <li><strong>Bouton "Cowork"</strong> en haut de l'app : c'est là que tu actives le mode agent (cf. étape 4).</li>
       <li><strong>Bouton + ou icône trombone</strong> dans la barre de saisie : joindre fichier, photo, ou lancer un Connecteur.</li>
       <li><strong>Settings (en bas à gauche, ton avatar)</strong> : profil, modèles, Connecteurs, Compétences, Plugins, Custom Instructions.</li>
     </ul>
+
+    <h3>1.4 — Tes 30 premières minutes</h3>
+    <p>Si tu ne sais pas par où commencer, suis ce planning. Tu auras un Claude opérationnel et un premier Cowork qui marche en une demi-heure.</p>
+    <ol class="steps">
+      <li><strong>0-5 min — Installer.</strong> Télécharge Claude Desktop, ouvre Pro dans Settings, lance l'app.</li>
+      <li><strong>5-10 min — Crée ton <code>about-me.md</code>.</strong> Un fichier texte de 10-20 lignes : qui tu es, ton rôle (étudiant marketing, 21 ans, MacBook), comment tu communiques (direct, tutoiement, anti-yes-man), un exemple court d'écriture qui te ressemble.</li>
+      <li><strong>10-15 min — Premier Cowork.</strong> Crée un dossier de travail (cf. étape 4), sélectionne-le dans Cowork, demande à Claude : <em>« Lis le fichier <code>about-me.md</code>. Résume-moi qui je suis en 3 lignes. »</em></li>
+      <li><strong>15-20 min — Teste un Plugin.</strong> Va sur <code>claude.com/plugins</code>, installe le plugin <strong>Marketing</strong>, retourne dans le chat, tape <kbd>/</kbd> pour voir les commandes disponibles.</li>
+      <li><strong>20-25 min — Connecte un outil.</strong> Settings → Connecteurs → ajoute <strong>Google Drive</strong> ou <strong>Gmail</strong> selon ce que tu utilises le plus.</li>
+      <li><strong>25-30 min — Essaie Claude dans Excel.</strong> Ouvre un classeur (cours, suivi de stage), demande <em>« Résume chaque onglet en 2 phrases. »</em> (cf. encart Excel plus bas).</li>
+    </ol>
   </section>
 
   <!-- ============================================================
@@ -398,7 +411,7 @@
   <section class="container" aria-labelledby="step3-title">
     <span class="kicker">Étape 3</span>
     <h2 id="step3-title">Configurer ton Claude</h2>
-    <p class="lede">Trois leviers de configuration, tous accessibles depuis le menu <strong>Répertoire</strong> de l'app, plus les Instructions personnalisées (qui se règlent ailleurs).</p>
+    <p class="lede">Quatre leviers à connaître : <strong>Compétences</strong>, <strong>Connecteurs</strong> et <strong>Plugins</strong> (les 3 onglets du Répertoire), plus les <strong>Instructions personnalisées</strong> qui se règlent ailleurs.</p>
 
     <!-- 3a Compétences -->
     <h3>3.1 — Compétences (Skills)</h3>
@@ -453,16 +466,23 @@
     <!-- 3c Plugins -->
     <h3>3.3 — Plugins</h3>
     <p>
-      Le <strong>3<sup>e</sup> onglet du Répertoire</strong>, distinct des Compétences et des Connecteurs. Les Plugins sont des extensions de l'app qui ajoutent des outils intégrés ou des intégrations spécifiques (recherche web, exécution de code, intégrations partenaires précises).
+      Un <strong>Plugin</strong> est un <em>bundle métier</em> de compétences et de commandes pré-configurées. Tu installes le plugin "Marketing" et Claude reçoit d'un coup un paquet de Compétences et de slash-commands liées à ce métier (par exemple <code>/persona</code>, <code>/brief-créa</code>, <code>/audit-landing</code>).
     </p>
+    <p><strong>Les 11 plugins officiels</strong> couvrent : Ventes, Marketing, Juridique, Finance, Données, Produit, Support, etc. Pour toi, le bon départ c'est <strong>Marketing</strong>.</p>
     <h4>Installer un Plugin</h4>
     <ol class="steps">
-      <li>Répertoire → onglet <strong>Plugins</strong>.</li>
-      <li>Parcours la liste, lis la description.</li>
-      <li>Bouton <strong>+</strong> → Claude active l'extension dans tes prochaines conversations.</li>
+      <li>Va sur <code>claude.com/plugins</code> (ou Répertoire → onglet <strong>Plugins</strong> dans Claude Desktop).</li>
+      <li>Parcours la liste, choisis-en un (Marketing pour démarrer).</li>
+      <li>Clique <strong>Installer</strong>.</li>
+      <li>Retourne dans le chat, tape <kbd>/</kbd> dans la barre de saisie : tu vois la liste des commandes que ce plugin a ajoutées.</li>
     </ol>
     <div class="tip">
-      <strong>Plugins vs Connecteurs :</strong> en pratique, la frontière est fine. Règle simple — si c'est lié à un compte (Drive, Gmail, GitHub) c'est plutôt un <em>Connecteur</em> ; si c'est une capacité ajoutée à l'app (recherche web, exécution code, viewer PDF) c'est plutôt un <em>Plugin</em>. Quand tu hésites : explore les deux onglets, tu trouveras vite.
+      <strong>Plugins vs Compétences vs Connecteurs :</strong>
+      <ul style="margin: 6px 0 0; padding-left: 1.2rem;">
+        <li><strong>Compétence</strong> = une recette unique (un <code>SKILL.md</code>).</li>
+        <li><strong>Plugin</strong> = un pack thématique de compétences + commandes (Marketing = N recettes d'un coup).</li>
+        <li><strong>Connecteur</strong> = un accès à un service ou une donnée (Drive, Gmail, Slack, Notion, Figma…).</li>
+      </ul>
     </div>
 
     <!-- 3d Instructions personnalisées -->
@@ -529,13 +549,79 @@
       </article>
     </div>
 
+    <h3>Configure Cowork une bonne fois pour toutes</h3>
+    <p>
+      Avec Cowork, le jeu se joue avec des <strong>fichiers texte</strong>, pas avec des prompts qui s'évaporent à chaque conversation. Prends ce que tu sais (ton style, tes règles, tes meilleurs exemples) et mets-le dans des fichiers <code>.md</code>. Claude les relit à chaque tâche.
+    </p>
+
+    <h4>(a) Crée la structure de dossier de travail</h4>
+    <p>Sur ton Mac, crée un dossier <code>~/Claude-Cowork/</code> avec cette arborescence — tu la garderas pour des années :</p>
+<pre class="prompt">~/Claude-Cowork/
+├── À-PROPOS-DE-MOI/
+│   └── about-me.md            # qui tu es + tes règles d'écriture
+├── MODÈLES/
+│   ├── persona-template.md    # tes templates réutilisables
+│   ├── brief-créa-template.md
+│   └── audit-landing-template.md
+└── CLAUDE-OUTPUTS/             # ici Claude dépose tous ses livrables
+    └── (vide au début)</pre>
+
+    <h4>(b) Le fichier <code>about-me.md</code> : ton ADN</h4>
+    <p>C'est le fichier le plus important. Tu le rédiges une fois, Claude s'y réfère à chaque tâche. Modèle de départ :</p>
+<pre class="prompt"># À propos de moi
+
+Je m'appelle [PRÉNOM]. J'ai 21 ans, je suis étudiant en marketing
+digital. Je travaille sur Mac.
+
+## Ma posture
+- Direct, sans jargon ni langue de bois.
+- Anti-yes-man : si une idée est mauvaise, dis-le.
+- Je préfère 3 propositions argumentées qu'une seule "parfaite".
+
+## Mon style d'écriture
+- Phrases courtes, une idée par phrase.
+- Pas d'emojis sauf si je le demande.
+- Pas de "🚀", pas de "thread", pas de "game-changer".
+
+## Exemple de ce que j'aime écrire
+[colle ici un de tes meilleurs posts ou paragraphes]
+
+## Mes domaines d'intérêt actuels
+Marketing digital, social media, créa, analyse de campagnes,
+data marketing.</pre>
+
+    <h4>(c) Les instructions globales Cowork — à coller une fois</h4>
+    <p>Va dans <strong>Settings → Cowork → Instructions globales</strong> et colle ce bloc. Il s'applique à <em>toutes</em> tes sessions Cowork :</p>
+<pre class="prompt">- Lis À-PROPOS-DE-MOI/about-me.md avant chaque tâche.
+- Lis les fichiers du dossier MODÈLES/ correspondants à la tâche
+  si pertinent.
+- Étudie TOUJOURS la structure du projet avant de créer du contenu.
+- Sauvegarde tous tes livrables dans CLAUDE-OUTPUTS/.
+- Pose-moi des questions de clarification si l'objectif est flou
+  (au lieu d'inventer).
+- N'invente pas. Livre le travail.</pre>
+    <div class="tip">
+      <strong>Pourquoi c'est puissant :</strong> ces 6 lignes transforment Cowork en un assistant qui te connaît et qui sauve son travail au bon endroit. Tu poses ces règles une fois, ensuite tes prompts peuvent faire 10 mots et produire un travail de qualité.
+    </div>
+
+    <h3>Le prompt qui débloque (template)</h3>
+    <p>Pour chaque nouvelle tâche Cowork, démarre avec ce template. Il oblige Claude à clarifier avant d'agir — et tu évites les livrables à côté de la plaque.</p>
+<pre class="prompt">Je veux [MA TÂCHE] afin que [LE RÉSULTAT IDÉAL].
+
+D'abord, lis les fichiers que je t'ai fournis en entier
+avant de répondre.
+
+Ne commence pas encore. Pose-moi plutôt 3-5 questions
+de clarification pour que nous affinions ensemble l'approche.
+
+Ne fais rien tant que nous ne sommes pas alignés.</pre>
+
     <h3>Lance ton premier Cowork en 5 minutes</h3>
     <ol class="steps">
-      <li>Crée un dossier <code>~/Marketing/Test-Cowork</code> sur ton Mac. Mets-y un brief de stage (ou n'importe quel PDF marketing).</li>
-      <li>Dans Claude Desktop, crée un Project "Test Cowork" et colle un system prompt court : <em>« Tu es mon assistant marketing. Tu travailles dans <code>~/Marketing/Test-Cowork</code>. Ton style : direct, sans jargon. »</em></li>
-      <li>Active le <strong>mode Cowork</strong> dans la barre de saisie (icône dédiée).</li>
-      <li>Premier prompt : <em>« Lis le brief dans ce dossier. Génère un fichier <code>persona.md</code> avec le persona principal du produit décrit. Demande-moi validation avant d'écrire. »</em></li>
-      <li>Claude affiche son plan, tu valides étape par étape. Le fichier apparaît dans le dossier — vérifie-le, modifie-le directement si besoin.</li>
+      <li>Crée la structure <code>~/Claude-Cowork/</code> ci-dessus, remplis <code>about-me.md</code>.</li>
+      <li>Dans Claude Desktop, clique sur <strong>Cowork</strong> (en haut de l'app), sélectionne le dossier <code>~/Claude-Cowork/</code>.</li>
+      <li>Premier prompt : <em>« Lis <code>about-me.md</code>. Crée dans <code>MODÈLES/</code> un fichier <code>persona-template.md</code> qui sera mon template réutilisable de persona marketing. Pose-moi des questions avant. »</em></li>
+      <li>Claude pose ses questions, tu réponds, il génère, tu valides. Le fichier apparaît dans <code>MODÈLES/</code>. Tu l'as pour toujours.</li>
     </ol>
     <div class="tip">
       <strong>Posture clé :</strong> tu n'es pas spectateur. Cowork te demandera des validations, parfois plusieurs fois. Lis ce qu'il propose avant de cliquer "approuver". L'agent vaut ce que tu acceptes de relire.
@@ -579,6 +665,11 @@
             <td>Édition photo perso (retouche, recadrage IA)</td>
             <td>Nano Banana 2 (Gemini)</td>
             <td>Intégré à Google Photos, rapide.</td>
+          </tr>
+          <tr>
+            <td>Vidéo courte (générée IA, motion design simple)</td>
+            <td>Google Veo</td>
+            <td>Référence actuelle pour la vidéo IA. Pas Claude — il ne génère pas de vidéo.</td>
           </tr>
           <tr>
             <td>Trucs génériques rapides, recherche multi-sources</td>
@@ -677,6 +768,23 @@
           <li><strong>Projects</strong> : pareil, plus les fichiers de contexte que tu y déposes.</li>
           <li><strong>Fichiers Cowork</strong> : ils vivent sur <em>ton</em> disque, dans le dossier que tu lui as donné. Si tu l'effaces, c'est perdu — comme tout fichier local.</li>
           <li><strong>Conseil</strong> : pour les projets sérieux, mets le dossier Cowork sous git (même un repo perso GitHub). Tu auras l'historique gratis.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3 style="margin-top:0">Claude dans Excel</h3>
+        <p>Une IA intégrée à ton tableur. Claude lit chaque onglet, comprend les formules, sait ce que <code>D14</code> contient réellement. Très utile pour reportings, suivis de campagne, analyses de données de cours.</p>
+        <h4 style="margin-top: 12px; margin-bottom: 6px;">Installer</h4>
+        <ol class="steps">
+          <li>Dans Excel : <strong>Insérer → Obtenir des compléments</strong>.</li>
+          <li>Recherche <strong>"Claude by Anthropic"</strong> → <strong>Ajouter</strong>.</li>
+          <li>Connecte-toi avec ton compte Claude Pro.</li>
+        </ol>
+        <h4 style="margin-top: 14px; margin-bottom: 6px;">Premiers prompts à tester</h4>
+        <ul style="margin: 0; padding-left: 1.25rem;">
+          <li><em>« Donne-moi un résumé de chaque onglet de ce classeur. »</em></li>
+          <li><em>« Explique en français simple ce que fait la formule en B12. »</em></li>
+          <li><em>« Trouve toutes les erreurs <code>#REF!</code> et <code>#VALEUR!</code> dans ce classeur, propose-moi des corrections. »</em></li>
         </ul>
       </article>
 
