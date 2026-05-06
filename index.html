@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Roadmap IA — 12 semaines</title>
-  <meta name="description" content="Roadmap pragmatique sur 12 semaines pour intégrer Claude et les agents IA à une stack marketing digital existante (ChatGPT, Gemini, NotebookLM).">
+  <title>Démarrer Claude — guide pratique (Mac)</title>
+  <meta name="description" content="Mode d'emploi pour démarrer Claude et Claude Desktop sur Mac : abonnement, installation, Compétences, Connecteurs, Plugins, instructions personnalisées, Cowork, et workflow d'arbitrage entre IA.">
   <meta name="color-scheme" content="light">
 
   <!-- Google Fonts : Inter pour le corps, JetBrains Mono pour le code -->
@@ -17,13 +17,14 @@
        Tokens — palette Claude Design (light, sobre)
        ========================================================= */
     :root {
-      --bg:            #FAFAF7;  /* fond principal off-white */
-      --surface:       #FFFFFF;  /* fond cards */
-      --text:          #1A1A1A;  /* texte principal */
-      --text-muted:    #6B7280;  /* texte secondaire */
-      --accent:        #D97757;  /* orange Anthropic */
-      --warning:       #F59E0B;  /* ambre */
-      --border:        #E5E7EB;  /* bordures */
+      --bg:            #FAFAF7;
+      --surface:       #FFFFFF;
+      --surface-soft:  #F3F3EF;
+      --text:          #1A1A1A;
+      --text-muted:    #6B7280;
+      --accent:        #D97757;
+      --warning:       #F59E0B;
+      --border:        #E5E7EB;
 
       --accent-soft:   rgba(217, 119, 87, 0.10);
       --warning-soft:  rgba(245, 158, 11, 0.08);
@@ -39,12 +40,8 @@
       --font-sans:     'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       --font-mono:     'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     }
-
     @media (min-width: 768px) {
-      :root {
-        --pad-x:       48px;
-        --gap-section: 64px;
-      }
+      :root { --pad-x: 48px; --gap-section: 64px; }
     }
 
     /* =========================================================
@@ -62,8 +59,6 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-
-    /* Conteneur centré */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -72,55 +67,54 @@
     }
 
     /* Typo */
-    h1, h2, h3 { color: var(--text); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 0; }
+    h1, h2, h3, h4 { color: var(--text); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 0; }
     h1 { font-size: clamp(2rem, 4.2vw + 1rem, 3rem); }
     h2 { font-size: clamp(1.5rem, 2vw + 1rem, 2rem); margin-bottom: 1rem; }
-    h3 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+    h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 1.75rem; margin-bottom: 0.5rem; }
+    h4 { font-size: 1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.4rem; }
     p  { margin: 0 0 1rem; }
     p:last-child { margin-bottom: 0; }
     a  { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    code { font-family: var(--font-mono); font-size: 0.92em; background: var(--accent-soft); color: var(--accent); padding: 0.1em 0.35em; border-radius: 4px; }
+    code { font-family: var(--font-mono); font-size: 0.9em; background: var(--accent-soft); color: var(--accent); padding: 0.1em 0.35em; border-radius: 4px; }
     strong { font-weight: 600; }
+    kbd {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      background: var(--surface);
+      color: var(--text);
+      padding: 1px 6px;
+      border: 1px solid var(--border);
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
 
-    /* Espacement vertical entre sections */
     section { padding-top: var(--gap-section); padding-bottom: 0; }
     section:last-of-type { padding-bottom: var(--gap-section); }
 
     /* =========================================================
        Hero
        ========================================================= */
-    .hero {
-      padding-top: clamp(48px, 8vw, 96px);
-      padding-bottom: 8px;
-    }
+    .hero { padding-top: clamp(48px, 8vw, 96px); padding-bottom: 8px; }
     .hero__subtitle {
       color: var(--text-muted);
       font-size: clamp(1rem, 0.8vw + 0.85rem, 1.125rem);
       max-width: 640px;
       margin-top: 1.25rem;
     }
-    .hero__badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 1.75rem;
-    }
-
-    /* Badge pilule (accent doux) */
+    .hero__badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.75rem; }
     .badge {
-      display: inline-flex;
-      align-items: center;
+      display: inline-flex; align-items: center;
       padding: 6px 12px;
       border-radius: 9999px;
       background: var(--accent-soft);
       color: var(--accent);
       font-size: 0.8125rem;
       font-weight: 500;
-      letter-spacing: 0.005em;
     }
 
-    /* Section heading kicker (petit label au-dessus du h2) */
+    /* Kicker (label "Étape N" au-dessus du H2) */
     .kicker {
       display: inline-block;
       font-family: var(--font-mono);
@@ -130,14 +124,10 @@
       color: var(--accent);
       margin-bottom: 0.75rem;
     }
-    .lede {
-      color: var(--text-muted);
-      max-width: 640px;
-      margin-top: 0.5rem;
-    }
+    .lede { color: var(--text-muted); max-width: 640px; margin-top: 0.5rem; }
 
     /* =========================================================
-       Cards génériques
+       Cards
        ========================================================= */
     .card {
       background: var(--surface);
@@ -146,224 +136,140 @@
       box-shadow: var(--shadow);
       padding: 20px;
     }
+    .card h3 { margin-top: 0; }
 
-    /* =========================================================
-       Section "4 piliers" — grille de cards
-       ========================================================= */
-    .pillars {
+    /* Grille générique 2/1 */
+    .grid-2 {
       display: grid;
       gap: 16px;
       grid-template-columns: 1fr;
       margin-top: 1.5rem;
     }
-    @media (min-width: 560px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 960px) { .pillars { grid-template-columns: repeat(4, 1fr); } }
-
-    .pillar__role     { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
-    .pillar__title    { margin-top: 6px; }
-    .pillar__tool     { margin-top: 8px; font-size: 0.95rem; color: var(--text); font-weight: 500; }
-    .pillar__desc     { margin-top: 8px; font-size: 0.9rem; color: var(--text-muted); }
-    .pillar__cost     { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 600; }
-    .pillar__cost span { color: var(--text-muted); font-weight: 500; }
-
-    /* Encart "Total" sous la grille */
-    .total-banner {
-      margin-top: 20px;
-      padding: 16px 20px;
-      background: var(--accent-soft);
-      border-left: 3px solid var(--accent);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-    }
-    .total-banner strong { color: var(--accent); }
+    @media (min-width: 720px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
 
     /* =========================================================
-       Timeline des 5 phases
+       Numbered steps (liste à pastilles)
        ========================================================= */
-    .timeline {
+    .steps { list-style: none; padding: 0; margin: 1rem 0 0; counter-reset: step; }
+    .steps li {
       position: relative;
-      margin-top: 1.5rem;
-      padding-left: 44px; /* place pour le trait + pastille */
+      padding-left: 40px;
+      margin-bottom: 14px;
+      counter-increment: step;
     }
-    /* Trait vertical */
-    .timeline::before {
-      content: "";
+    .steps li::before {
+      content: counter(step);
       position: absolute;
-      left: 15px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: var(--border);
-      border-radius: 2px;
-    }
-
-    .phase { position: relative; margin-bottom: 36px; }
-    .phase:last-child { margin-bottom: 0; }
-
-    /* Pastille numérotée sur le trait */
-    .phase__num {
-      position: absolute;
-      left: -44px;
-      top: 0;
-      width: 32px;
-      height: 32px;
+      left: 0; top: 0;
+      width: 26px; height: 26px;
       border-radius: 50%;
-      background: var(--surface);
-      border: 2px solid var(--accent);
+      background: var(--accent-soft);
       color: var(--accent);
       font-weight: 600;
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow);
+      font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
     }
-
-    .phase__header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 8px 12px;
-      margin-bottom: 6px;
-    }
-    .phase__title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
-    .phase__duration {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      padding: 2px 8px;
-      border: 1px solid var(--border);
-      border-radius: 9999px;
-      background: var(--surface);
-    }
-
-    .phase__intro { color: var(--text-muted); margin-top: 4px; }
-
-    .phase ul {
-      margin: 12px 0 0;
-      padding-left: 1.25rem;
-    }
-    .phase li { margin-bottom: 6px; }
-    .phase li::marker { color: var(--text-muted); }
-
-    /* Bloc "livrable de phase" */
-    .deliverable {
-      margin-top: 16px;
-      padding: 12px 14px;
-      background: var(--accent-soft);
-      border-radius: var(--radius-sm);
-      font-size: 0.92rem;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .deliverable__icon {
-      flex: 0 0 auto;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
-    .deliverable strong { color: var(--accent); }
+    .steps li:last-child { margin-bottom: 0; }
 
     /* =========================================================
-       Tableaux (utilisés dans Phase 2)
+       Tableaux (réutilise convention v1)
        ========================================================= */
     .table-wrap {
       margin-top: 14px;
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      overflow-x: auto;       /* horizontal scroll si vraiment nécessaire en mobile */
+      overflow-x: auto;
       background: var(--surface);
       -webkit-overflow-scrolling: touch;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      min-width: 560px;       /* garantit la lisibilité du tableau */
-    }
-    th, td {
-      text-align: left;
-      padding: 12px 14px;
-      vertical-align: top;
-      border-bottom: 1px solid var(--border);
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 560px; }
+    th, td { text-align: left; padding: 11px 13px; vertical-align: top; border-bottom: 1px solid var(--border); }
     thead th {
-      font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      background: var(--bg);
+      font-weight: 600; font-size: 0.75rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--text-muted); background: var(--bg);
     }
-    tbody tr:nth-child(even) td { background: rgba(0, 0, 0, 0.015); }
+    tbody tr:nth-child(even) td { background: rgba(0, 0, 0, 0.012); }
     tbody tr:last-child td { border-bottom: 0; }
 
     /* =========================================================
-       Pièges à éviter — cards-warning
+       Encart info / tip / warning
        ========================================================= */
-    .warnings {
-      display: grid;
-      gap: 12px;
-      margin-top: 1.5rem;
-      grid-template-columns: 1fr;
+    .tip {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
     }
+    .tip strong { color: var(--accent); }
+
     .warning {
+      margin-top: 14px;
       background: var(--warning-soft);
       border: 1px solid rgba(245, 158, 11, 0.18);
       border-left: 3px solid var(--warning);
       border-radius: var(--radius-sm);
       padding: 14px 16px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
+      display: flex; gap: 12px; align-items: flex-start;
     }
     .warning__icon {
-      flex: 0 0 auto;
-      width: 20px;
-      height: 20px;
-      margin-top: 2px;
-      color: var(--warning);
+      flex: 0 0 auto; width: 20px; height: 20px;
+      margin-top: 2px; color: var(--warning);
     }
     .warning__icon svg { display: block; width: 100%; height: 100%; }
     .warning__body { font-size: 0.95rem; }
-    .warning__body strong { color: var(--text); font-weight: 600; }
+    .warning__body strong { color: var(--text); }
+
+    /* Liste empilée d'encarts (pratiques & pièges) */
+    .stack { display: grid; gap: 12px; margin-top: 1.5rem; }
 
     /* =========================================================
-       Citation / lecture stratégique
+       Bloc prompt copiable
        ========================================================= */
-    .strategy {
-      margin-top: 1.5rem;
-      padding: 24px 28px;
-      background: #F3F3EF;          /* gris très clair, légèrement plus chaud que le fond */
-      border-radius: var(--radius);
+    .prompt {
+      margin-top: 12px;
+      padding: 14px 16px;
+      background: var(--surface);
       border: 1px solid var(--border);
-    }
-    .strategy blockquote {
-      margin: 0;
-      font-style: italic;
-      font-size: 1.0625rem;
-      line-height: 1.6;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.55;
       color: var(--text);
-      max-width: 680px;
+      white-space: pre-wrap;
+      overflow-x: auto;
     }
-    .strategy blockquote::before {
-      content: "“";
-      font-family: var(--font-sans);
-      font-size: 2.25rem;
-      line-height: 0;
-      color: var(--accent);
-      margin-right: 6px;
-      vertical-align: -0.4em;
+    .prompt-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 18px;
+      margin-bottom: 4px;
+      color: var(--text);
     }
+
+    /* =========================================================
+       Schéma écosystème (4 cards visuelles)
+       ========================================================= */
+    .ecosystem {
+      display: grid; gap: 12px; margin-top: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .ecosystem { grid-template-columns: repeat(2, 1fr); } }
+    .ecosystem .card { display: flex; flex-direction: column; }
+    .eco__tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .eco__title { margin-top: 4px; }
+    .eco__desc { margin-top: 10px; font-size: 0.92rem; color: var(--text-muted); }
+    .eco__when { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; }
+    .eco__when strong { color: var(--text); font-weight: 600; }
 
     /* =========================================================
        Footer
@@ -377,16 +283,11 @@
       font-size: 0.875rem;
     }
     footer p { margin: 0; }
-    footer .footer__date {
+    .footer__date {
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      letter-spacing: 0.02em;
-      color: var(--text-muted);
     }
 
-    /* =========================================================
-       Accessibilité — focus visible
-       ========================================================= */
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
@@ -397,278 +298,450 @@
 <body>
 
   <!-- ============================================================
-       4.1 Hero — H1, sous-titre, 2 badges
+       Hero
        ============================================================ -->
   <header class="hero container">
-    <h1>Maîtriser l'IA en 12 semaines</h1>
+    <h1>Démarrer Claude</h1>
     <p class="hero__subtitle">
-      Roadmap pragmatique pour un étudiant marketing digital qui connaît déjà ChatGPT et Gemini, et veut intégrer Claude + les agents IA sans se disperser.
+      Guide pratique pour passer du chatbot à l'agent IA. Abonnement, installation, configuration, workflow d'arbitrage entre outils — pour un étudiant marketing digital sur Mac.
     </p>
     <div class="hero__badges">
       <span class="badge">Profil : étudiant marketing digital, 21 ans</span>
-      <span class="badge">Posture : arbitrer, pas accumuler</span>
+      <span class="badge">Cible : MacBook + Claude Desktop</span>
     </div>
   </header>
 
   <!-- ============================================================
-       4.2 La stack à 4 piliers — grille responsive 4/2/1 cols
+       Étape 1 — Installer & s'abonner
        ============================================================ -->
-  <section class="container" aria-labelledby="piliers-title">
-    <span class="kicker">Stack</span>
-    <h2 id="piliers-title">La stack à 4 piliers</h2>
-    <p class="lede">Quatre outils, quatre rôles distincts. Aucun cumul gratuit : chacun fait ce que les autres font moins bien.</p>
+  <section class="container" aria-labelledby="step1-title">
+    <span class="kicker">Étape 1</span>
+    <h2 id="step1-title">Installer &amp; s'abonner</h2>
+    <p class="lede">15 minutes chrono. Tu auras Claude prêt à l'emploi sur ton Mac et dans ton navigateur.</p>
 
-    <div class="pillars">
-      <!-- Pilier 1 -->
-      <article class="card pillar">
-        <div class="pillar__role">Rédaction &amp; raisonnement</div>
-        <h3 class="pillar__title">Claude Pro</h3>
-        <div class="pillar__tool">Opus 4.7</div>
-        <p class="pillar__desc">Moteur principal : analyse, rédaction, Artifacts, Projects, Claude Design.</p>
-        <div class="pillar__cost">20 $ <span>/ mois</span></div>
-      </article>
-      <!-- Pilier 2 -->
-      <article class="card pillar">
-        <div class="pillar__role">Visuels avec texte</div>
-        <h3 class="pillar__title">ChatGPT Plus</h3>
-        <div class="pillar__tool">GPT Image 2</div>
-        <p class="pillar__desc">Mockups marketing, infographies, social avec texte propre, batches cohérents.</p>
-        <div class="pillar__cost">20 $ <span>/ mois</span></div>
-      </article>
-      <!-- Pilier 3 -->
-      <article class="card pillar">
-        <div class="pillar__role">Édition visuelle rapide</div>
-        <h3 class="pillar__title">Gemini AI Pro</h3>
-        <div class="pillar__tool">Nano Banana 2</div>
-        <p class="pillar__desc">Édition photo, intégration Google Photos perso, multi-langues.</p>
-        <div class="pillar__cost">~22 $ <span>/ mois</span></div>
-      </article>
-      <!-- Pilier 4 -->
-      <article class="card pillar">
-        <div class="pillar__role">Veille sourcée</div>
-        <h3 class="pillar__title">NotebookLM</h3>
-        <div class="pillar__tool">inclus dans Gemini</div>
-        <p class="pillar__desc">Q&amp;R sur cours et études, podcasts audio depuis ses docs.</p>
-        <div class="pillar__cost">inclus</div>
-      </article>
+    <h3>1.1 — Prendre l'abonnement Claude Pro</h3>
+    <ol class="steps">
+      <li>Va sur <code>claude.ai</code> et crée un compte (Google ou e-mail).</li>
+      <li>Settings → <strong>Plans &amp; Billing</strong> → choisis <strong>Pro</strong> (~20 $/mois).</li>
+      <li>Le plan Pro débloque : modèle Opus 4.7, Projects, Cowork, plus de Skills, plus de Connecteurs, quotas confortables.</li>
+    </ol>
+    <div class="tip">
+      <strong>Astuce coût :</strong> tu n'as pas besoin de garder ChatGPT Plus en parallèle. Pour les visuels avec texte (GPT Image 2), le <strong>plan gratuit ChatGPT</strong> suffit largement à un usage étudiant. Pour la veille temps réel via Grok, idem : version gratuite sur <code>grok.com</code> ou inclus dans X si tu y es. Cible réaliste : <strong>~20 $/mois</strong> pour Claude Pro, le reste en gratuit.
     </div>
 
-    <p class="total-banner">
-      <strong>Total : ~62 $/mois</strong> — justifié par la complémentarité, pas par le cumul.
+    <h3>1.2 — Installer Claude Desktop sur Mac</h3>
+    <ol class="steps">
+      <li>Va sur <code>claude.ai/download</code> et télécharge la version macOS (Apple Silicon ou Intel selon ton Mac).</li>
+      <li>Ouvre le <code>.dmg</code>, glisse Claude.app dans <strong>Applications</strong>.</li>
+      <li>Lance Claude depuis Spotlight (<kbd>⌘</kbd> + <kbd>Espace</kbd>, tape "Claude").</li>
+      <li>Connecte-toi avec le même compte que <code>claude.ai</code>. Tout est synchronisé (conversations, Projects, Skills).</li>
+      <li>Autorise les notifications et l'accès au système de fichiers quand l'app le demande — c'est ce qui rendra Cowork fonctionnel plus tard.</li>
+    </ol>
+
+    <h3>1.3 — Tour rapide de l'interface</h3>
+    <ul>
+      <li><strong>Sidebar gauche</strong> : tes conversations récentes et tes Projects.</li>
+      <li><strong>Sélecteur de modèle</strong> (en haut de la zone de chat) : Sonnet par défaut, bascule sur Opus pour les tâches complexes.</li>
+      <li><strong>Bouton + ou icône trombone</strong> dans la barre de saisie : joindre fichier, photo, ou lancer un Connecteur.</li>
+      <li><strong>Settings (en bas à gauche, ton avatar)</strong> : profil, modèles, Connecteurs, Compétences, Plugins, Custom Instructions.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================
+       Étape 2 — Comprendre l'écosystème
+       ============================================================ -->
+  <section class="container" aria-labelledby="step2-title">
+    <span class="kicker">Étape 2</span>
+    <h2 id="step2-title">Comprendre l'écosystème</h2>
+    <p class="lede">Quatre "Claude" différents, qui partagent ton compte et tes données. Sache lequel utiliser quand.</p>
+
+    <div class="ecosystem">
+
+      <article class="card">
+        <span class="eco__tag">Web</span>
+        <h3 class="eco__title">Claude.ai</h3>
+        <p class="eco__desc">L'interface dans le navigateur. Tu y as accès depuis n'importe quel device, y compris ton smartphone.</p>
+        <p class="eco__when"><strong>Utilise-le pour :</strong> tester rapidement, partager une conversation, accéder depuis le téléphone.</p>
+      </article>
+
+      <article class="card">
+        <span class="eco__tag">Desktop</span>
+        <h3 class="eco__title">Claude Desktop (Mac)</h3>
+        <p class="eco__desc">L'app native macOS. Mêmes conversations que <code>claude.ai</code>, plus l'accès au système de fichiers, aux Connecteurs locaux et à Cowork.</p>
+        <p class="eco__when"><strong>Utilise-la pour :</strong> ton usage quotidien sur Mac. C'est le centre de gravité.</p>
+      </article>
+
+      <article class="card">
+        <span class="eco__tag">Agent</span>
+        <h3 class="eco__title">Cowork</h3>
+        <p class="eco__desc">Mode agentic <em>dans</em> Claude Desktop. Claude lit, modifie et crée des fichiers dans un dossier que tu lui donnes, étape par étape, avec ton accord.</p>
+        <p class="eco__when"><strong>Utilise-le quand :</strong> tu veux un livrable concret (rapport, persona, plan), pas juste une réponse.</p>
+      </article>
+
+      <article class="card">
+        <span class="eco__tag">CLI · Dev</span>
+        <h3 class="eco__title">Claude Code</h3>
+        <p class="eco__desc">Outil en ligne de commande pour les tâches de développement. S'installe via npm. Lit/écrit ton code, lance des commandes git, exécute des tests.</p>
+        <p class="eco__when"><strong>Utilise-le pour :</strong> coder un site, automatiser un script, gérer un repo. Pas pour rédiger.</p>
+      </article>
+
+    </div>
+
+    <div class="tip">
+      <strong>À retenir :</strong> Cowork n'est pas une app séparée. C'est <em>un mode</em> dans Claude Desktop. Tu n'as rien à installer en plus.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Étape 3 — Configurer ton Claude
+       ============================================================ -->
+  <section class="container" aria-labelledby="step3-title">
+    <span class="kicker">Étape 3</span>
+    <h2 id="step3-title">Configurer ton Claude</h2>
+    <p class="lede">Trois leviers de configuration, tous accessibles depuis le menu <strong>Répertoire</strong> de l'app, plus les Instructions personnalisées (qui se règlent ailleurs).</p>
+
+    <!-- 3a Compétences -->
+    <h3>3.1 — Compétences (Skills)</h3>
+    <p>
+      Une <strong>Compétence</strong> est un mini-mode d'emploi qu'on donne à Claude pour qu'il fasse une tâche bien précise et de façon répétable. Concrètement c'est un dossier avec un fichier <code>SKILL.md</code> qui décrit la marche à suivre, plus parfois des scripts. Claude la déclenche tout seul quand le contexte le justifie.
+    </p>
+    <p><strong>Exemples utiles pour toi :</strong></p>
+    <ul>
+      <li><code>brief-créa</code> : tu décris le client + l'objectif, Claude pond un brief créa structuré.</li>
+      <li><code>persona</code> : tu donnes un produit, Claude génère un persona marketing complet.</li>
+      <li><code>audit-landing</code> : tu colles l'URL ou les contenus, Claude rend un audit UX/copy.</li>
+    </ul>
+    <h4>Installer une Compétence</h4>
+    <ol class="steps">
+      <li>Dans Claude Desktop, ouvre le <strong>Répertoire</strong> (icône à gauche ou via Settings).</li>
+      <li>Onglet <strong>Compétences</strong>.</li>
+      <li>Trouve une Compétence pré-faite par Anthropic ou un partenaire → bouton <strong>+</strong>.</li>
+    </ol>
+    <h4>Créer une Compétence perso</h4>
+    <p>
+      Le plus simple : demande à Claude lui-même. Prompt type : <em>« Crée-moi une Compétence Claude qui fait X. Génère le SKILL.md selon la spec officielle. »</em> Tu obtiens un fichier que tu déposes dans le bon dossier (Claude Desktop te guide pour l'emplacement).
+    </p>
+
+    <!-- 3b Connecteurs -->
+    <h3>3.2 — Connecteurs</h3>
+    <p>
+      Un <strong>Connecteur</strong> donne à Claude l'accès à <em>un service ou une donnée</em>. Techniquement c'est un serveur MCP (Model Context Protocol). En pratique tu cliques, tu autorises, ça marche.
+    </p>
+    <p><strong>Connecteurs prioritaires pour toi :</strong></p>
+    <ul>
+      <li><strong>Filesystem</strong> — accès aux fichiers de ton Mac. <em>Indispensable pour Cowork.</em></li>
+      <li><strong>Google Drive</strong> — Claude lit/écrit dans tes Docs et Sheets.</li>
+      <li><strong>Gmail</strong> — Claude rédige tes mails de candidature, prépare des relances.</li>
+      <li><strong>Calendar</strong> — Claude lit ton agenda pour planifier autour.</li>
+      <li><strong>Figma</strong> (plus tard) — pour récupérer des maquettes en contexte.</li>
+    </ul>
+    <h4>Ajouter un Connecteur</h4>
+    <ol class="steps">
+      <li>Répertoire → onglet <strong>Connecteurs</strong>.</li>
+      <li>Filtre <strong>Anthropic &amp; Partenaires</strong> pour les officiels.</li>
+      <li>Bouton <strong>+</strong> sur le connecteur voulu.</li>
+      <li>Claude ouvre une fenêtre OAuth (Google / Microsoft / etc.) → tu autorises uniquement les scopes nécessaires.</li>
+      <li>Le connecteur apparaît dans la liste active. Tu peux désactiver à tout moment.</li>
+    </ol>
+    <div class="warning">
+      <span class="warning__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      <p class="warning__body"><strong>Connecteurs tiers :</strong> tout ce qui n'est pas estampillé "Anthropic" est un MCP server tiers. Lis ce qu'il fait avant d'autoriser. En cas de doute : ne l'installe pas.</p>
+    </div>
+
+    <!-- 3c Plugins -->
+    <h3>3.3 — Plugins</h3>
+    <p>
+      Le <strong>3<sup>e</sup> onglet du Répertoire</strong>, distinct des Compétences et des Connecteurs. Les Plugins sont des extensions de l'app qui ajoutent des outils intégrés ou des intégrations spécifiques (recherche web, exécution de code, intégrations partenaires précises).
+    </p>
+    <h4>Installer un Plugin</h4>
+    <ol class="steps">
+      <li>Répertoire → onglet <strong>Plugins</strong>.</li>
+      <li>Parcours la liste, lis la description.</li>
+      <li>Bouton <strong>+</strong> → Claude active l'extension dans tes prochaines conversations.</li>
+    </ol>
+    <div class="tip">
+      <strong>Plugins vs Connecteurs :</strong> en pratique, la frontière est fine. Règle simple — si c'est lié à un compte (Drive, Gmail, GitHub) c'est plutôt un <em>Connecteur</em> ; si c'est une capacité ajoutée à l'app (recherche web, exécution code, viewer PDF) c'est plutôt un <em>Plugin</em>. Quand tu hésites : explore les deux onglets, tu trouveras vite.
+    </div>
+
+    <!-- 3d Instructions personnalisées -->
+    <h3>3.4 — Instructions personnalisées : trois endroits à connaître</h3>
+    <p>
+      C'est <em>le</em> levier qui sort Claude du ton IA générique. Trois emplacements, trois portées différentes.
+    </p>
+
+    <h4>(a) Au niveau du compte — Claude.ai</h4>
+    <p>
+      <strong>Settings → Profile → Personalisation / Custom Instructions</strong>. Ce que tu écris là s'applique à <em>toutes</em> tes conversations, partout (web et Desktop).
+    </p>
+    <p><strong>À mettre :</strong> qui tu es (étudiant marketing digital, 21 ans), comment tu veux que Claude te parle (tutoiement, style direct, pas de yes-man), domaines qui t'intéressent.</p>
+
+    <h4>(b) Au niveau du Project — Claude.ai &amp; Desktop</h4>
+    <p>
+      Un <strong>Project</strong> = un dossier de conversations + un système de prompt + des fichiers de contexte. Le system prompt du Project surclasse les instructions du compte sur ce projet.
+    </p>
+    <p><strong>Cas d'usage :</strong></p>
+    <ul>
+      <li><strong>Project "Études marketing"</strong> : ton style de devoir, format APA pour les sources, etc.</li>
+      <li><strong>Project "Stage [nom de la boîte]"</strong> : nom du client, ton de marque, contexte produit.</li>
+      <li><strong>Project "Veille perso"</strong> : sources préférées, format de fiche de lecture.</li>
+    </ul>
+
+    <h4>(c) Pour Cowork — dans Claude Desktop</h4>
+    <p>
+      Cowork hérite du Project actif. <strong>Tu n'as donc qu'un seul endroit où penser ton contexte : le Project.</strong> Les fichiers que tu déposes dans le Project (PDF, briefs, charte de marque) sont visibles par Cowork.
+    </p>
+
+    <h4>(d) Pour Claude Code — fichiers <code>CLAUDE.md</code></h4>
+    <p>
+      Claude Code lit deux fichiers de contexte au démarrage :
+    </p>
+    <ul>
+      <li><code>./CLAUDE.md</code> — à la racine du projet sur lequel tu travailles. Spécifique au repo.</li>
+      <li><code>~/.claude/CLAUDE.md</code> — global. Tes préférences personnelles qui s'appliquent à <em>tous</em> tes projets de code.</li>
+    </ul>
+    <p>
+      Le fichier projet <em>complète</em> le fichier global. Mets dans le global tes conventions perso ("anti-yes-man", "commenter plutôt qu'optimiser") et dans le projet le contexte du repo (stack, conventions, scripts à connaître).
     </p>
   </section>
 
   <!-- ============================================================
-       4.3 Les 5 phases — timeline verticale
+       Étape 4 — Agent vs chatbot, premier Cowork
        ============================================================ -->
-  <section class="container" aria-labelledby="phases-title">
-    <span class="kicker">Roadmap</span>
-    <h2 id="phases-title">Les 5 phases</h2>
-    <p class="lede">Douze semaines de fondations, puis une montée en autonomie. À chaque phase, un livrable concret.</p>
+  <section class="container" aria-labelledby="step4-title">
+    <span class="kicker">Étape 4</span>
+    <h2 id="step4-title">Agent vs chatbot — premier Cowork</h2>
+    <p class="lede">La marche cognitive la plus rentable à passer en 2026 : comprendre ce qui change quand l'IA <em>agit</em> au lieu de juste <em>répondre</em>.</p>
 
-    <div class="timeline">
+    <div class="grid-2">
+      <article class="card">
+        <span class="eco__tag">Chatbot</span>
+        <h3 class="eco__title">Il répond</h3>
+        <p class="eco__desc">Tu poses une question, il génère du texte. À toi ensuite de copier, coller, mettre en forme, sauver. <strong>Tu fais le travail final.</strong></p>
+        <p class="eco__when"><strong>Exemple :</strong> "Donne-moi une trame de persona marketing." → Claude liste les sections, tu rédiges.</p>
+      </article>
+      <article class="card">
+        <span class="eco__tag">Agent</span>
+        <h3 class="eco__title">Il agit</h3>
+        <p class="eco__desc">Tu donnes une mission, il enchaîne les étapes : il lit des fichiers, en crée d'autres, exécute des commandes, te demande validation aux moments-clés. <strong>Tu superviseS.</strong></p>
+        <p class="eco__when"><strong>Exemple :</strong> "Dans ce dossier, génère le persona dans persona.md à partir du brief." → Cowork le fait, tu relis.</p>
+      </article>
+    </div>
 
-      <!-- Phase 1 -->
-      <article class="phase">
-        <div class="phase__num" aria-hidden="true">1</div>
-        <div class="phase__header">
-          <div class="phase__title">Fondations Claude</div>
-          <span class="phase__duration">Semaines 1-2</span>
-        </div>
-        <ul>
-          <li>S'abonner à Claude Pro.</li>
-          <li>Créer un <strong>dossier de contexte</strong> (3 fichiers <code>.md</code> &lt; 2000 mots) : <code>about-me</code>, <code>projets-marketing</code>, <code>style-redaction</code>.</li>
-          <li>Premier <strong>Project Claude</strong> : « Études marketing digital ».</li>
-          <li>Tester les <strong>Artifacts</strong> sur 3 cas concrets (mockup landing, post LinkedIn, analyse SWOT).</li>
-        </ul>
-        <div class="deliverable">
-          <span class="deliverable__icon" aria-hidden="true">✓</span>
-          <div><strong>Livrable de phase :</strong> un Project Claude opérationnel + 3 artifacts produits.</div>
-        </div>
+    <h3>Lance ton premier Cowork en 5 minutes</h3>
+    <ol class="steps">
+      <li>Crée un dossier <code>~/Marketing/Test-Cowork</code> sur ton Mac. Mets-y un brief de stage (ou n'importe quel PDF marketing).</li>
+      <li>Dans Claude Desktop, crée un Project "Test Cowork" et colle un system prompt court : <em>« Tu es mon assistant marketing. Tu travailles dans <code>~/Marketing/Test-Cowork</code>. Ton style : direct, sans jargon. »</em></li>
+      <li>Active le <strong>mode Cowork</strong> dans la barre de saisie (icône dédiée).</li>
+      <li>Premier prompt : <em>« Lis le brief dans ce dossier. Génère un fichier <code>persona.md</code> avec le persona principal du produit décrit. Demande-moi validation avant d'écrire. »</em></li>
+      <li>Claude affiche son plan, tu valides étape par étape. Le fichier apparaît dans le dossier — vérifie-le, modifie-le directement si besoin.</li>
+    </ol>
+    <div class="tip">
+      <strong>Posture clé :</strong> tu n'es pas spectateur. Cowork te demandera des validations, parfois plusieurs fois. Lis ce qu'il propose avant de cliquer "approuver". L'agent vaut ce que tu acceptes de relire.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Étape 5 — Workflow de Papa
+       ============================================================ -->
+  <section class="container" aria-labelledby="step5-title">
+    <span class="kicker">Étape 5</span>
+    <h2 id="step5-title">Mon workflow — outil par tâche</h2>
+    <p class="lede">La règle d'or : <strong>outil par tâche, pas tâche par outil</strong>. Chaque IA est meilleure quelque part. Voici l'arbitrage que j'utilise.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Tâche</th>
+            <th scope="col">Outil</th>
+            <th scope="col">Pourquoi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rédaction (post, brief, mail, devoir)</td>
+            <td>Claude</td>
+            <td>Meilleur niveau d'écriture, suit ton style si tu le donnes en contexte.</td>
+          </tr>
+          <tr>
+            <td>Analyse, raisonnement, dissertation</td>
+            <td>Claude (Opus)</td>
+            <td>Raisonnement profond. Bascule sur Opus uniquement quand la tâche le mérite.</td>
+          </tr>
+          <tr>
+            <td>Visuel social avec texte intégré</td>
+            <td>GPT Image 2 <em>(plan ChatGPT gratuit)</em></td>
+            <td>Le rendu de texte le plus propre du marché.</td>
+          </tr>
+          <tr>
+            <td>Édition photo perso (retouche, recadrage IA)</td>
+            <td>Nano Banana 2 (Gemini)</td>
+            <td>Intégré à Google Photos, rapide.</td>
+          </tr>
+          <tr>
+            <td>Trucs génériques rapides, recherche multi-sources</td>
+            <td>Gemini</td>
+            <td>Bon Google Search intégré, gratuit pour usage léger.</td>
+          </tr>
+          <tr>
+            <td>Analyse de docs (cours, études, PDF longs)</td>
+            <td>NotebookLM</td>
+            <td>Sources visibles, citations, mode podcast audio. Inclus dans Gemini.</td>
+          </tr>
+          <tr>
+            <td>Veille temps réel (X, news fraîches, tendances)</td>
+            <td>Grok <em>(gratuit, ponctuel)</em></td>
+            <td>Accès direct au flux X. Pas d'abonnement nécessaire pour l'usage de base.</td>
+          </tr>
+          <tr>
+            <td>Mise en page d'une veille Grok</td>
+            <td>Claude</td>
+            <td>Tu copies la sortie Grok dans Claude, qui la met au propre.</td>
+          </tr>
+          <tr>
+            <td>Dev simple, scripts d'une page</td>
+            <td>Claude (chat)</td>
+            <td>Ça suffit, pas besoin du CLI.</td>
+          </tr>
+          <tr>
+            <td>Dev sérieux, multi-fichiers, repo git</td>
+            <td>Claude Code</td>
+            <td>Lit tout le repo, exécute les commandes, gère git. C'est un agent complet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Exemple narratif : audit de campagne d'un concurrent</h3>
+    <ol class="steps">
+      <li><strong>Grok</strong> : "Que dit X sur les dernières campagnes de [marque] ce mois-ci ?" → liste de signaux frais.</li>
+      <li><strong>NotebookLM</strong> : tu y déposes les études citées par Grok + 2 rapports Stratégies → fiche de synthèse sourcée.</li>
+      <li><strong>Claude</strong> (Project "Audit campagnes") : tu colles la fiche NotebookLM, demandes l'audit structuré (forces / faiblesses / opportunités).</li>
+      <li><strong>GPT Image 2</strong> (gratuit) : visuel de couverture pour le livrable, avec le titre intégré dans l'image.</li>
+      <li><strong>Cowork</strong> : tu fais générer la version finale Word/Markdown du livrable dans ton dossier.</li>
+    </ol>
+  </section>
+
+  <!-- ============================================================
+       Bonnes pratiques & pièges
+       ============================================================ -->
+  <section class="container" aria-labelledby="prat-title">
+    <span class="kicker">Bonnes pratiques</span>
+    <h2 id="prat-title">Pièges &amp; règles à connaître</h2>
+    <p class="lede">Lis-les une fois, tu éviteras les frustrations de débutant et les bourdes de pro.</p>
+
+    <div class="stack">
+
+      <article class="card">
+        <h3 style="margin-top:0">Quel modèle quand</h3>
+        <p>Sonnet (rapide) pour 90 % de ton usage : rédaction courte, brainstorming, recherche, code simple. Opus (raisonnement profond) pour : dissertation longue, analyse stratégique, debug complexe, architecture. <strong>Si tu mets Opus partout, tu vides tes quotas en 2h.</strong></p>
       </article>
 
-      <!-- Phase 2 -->
-      <article class="phase">
-        <div class="phase__num" aria-hidden="true">2</div>
-        <div class="phase__header">
-          <div class="phase__title">Création visuelle multi-modèles</div>
-          <span class="phase__duration">Semaines 3-4</span>
-        </div>
-        <p class="phase__intro">L'arbitrage entre les 3 modèles d'image est la compétence-clé.</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Besoin</th>
-                <th scope="col">Outil à utiliser</th>
-                <th scope="col">Pourquoi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Visuel social avec texte intégré</td>
-                <td>GPT Image 2 thinking mode</td>
-                <td>Rendu texte le plus précis du marché en avril 2026</td>
-              </tr>
-              <tr>
-                <td>Édition rapide d'une photo perso</td>
-                <td>Nano Banana 2</td>
-                <td>Personal Intelligence + Google Photos</td>
-              </tr>
-              <tr>
-                <td>Mockup app / landing / prototype interactif</td>
-                <td>Claude Design</td>
-                <td>Export HTML, sliders d'ajustement, design system</td>
-              </tr>
-              <tr>
-                <td>Copy autour du visuel</td>
-                <td>Claude Artifacts</td>
-                <td>Qualité rédactionnelle</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p style="margin-top: 14px;"><strong>Exercice de phase :</strong> reproduire une vraie campagne (Apple, Spotify, Nike) avec les 3 outils, comparer.</p>
-
-        <div class="deliverable">
-          <span class="deliverable__icon" aria-hidden="true">✓</span>
-          <div><strong>Livrable de phase :</strong> un comparatif visuel des 3 modèles sur le même brief.</div>
-        </div>
+      <article class="card">
+        <h3 style="margin-top:0">Quotas Claude Pro</h3>
+        <p>Le quota se compte en messages par fenêtre glissante de 5h, et il diffère entre Sonnet et Opus. Quand tu approches la limite, l'app t'avertit et bascule vers Sonnet auto. <strong>Astuce :</strong> ouvre une nouvelle conversation au lieu d'allonger la même — les longues conversations consomment plus.</p>
       </article>
 
-      <!-- Phase 3 -->
-      <article class="phase">
-        <div class="phase__num" aria-hidden="true">3</div>
-        <div class="phase__header">
-          <div class="phase__title">Veille et savoir</div>
-          <span class="phase__duration">Semaines 5-6</span>
-        </div>
-        <ul>
-          <li>Créer un notebook NotebookLM « Veille marketing 2026 » avec études McKinsey, rapports HubSpot, articles Stratégies.</li>
-          <li>Activer le <strong>podcast audio</strong> pour écoute en marchant.</li>
-          <li>Premiers <strong>Skills Claude</strong> : <code>/post-linkedin</code>, <code>/brief-créa</code>, <code>/analyse-campagne</code>.</li>
-          <li>Connecter Google Drive et Gmail à Claude.</li>
-        </ul>
-        <div class="deliverable">
-          <span class="deliverable__icon" aria-hidden="true">✓</span>
-          <div><strong>Livrable de phase :</strong> 3 Skills opérationnels + 1 notebook NotebookLM nourri.</div>
-        </div>
+      <article class="card">
+        <h3 style="margin-top:0">5 règles de prompt qui marchent</h3>
+        <ol style="margin: 0; padding-left: 1.25rem;">
+          <li><strong>Contexte d'abord</strong> : qui tu es, ce que tu fais, pour qui c'est.</li>
+          <li><strong>Exemples &gt; consignes abstraites</strong> : "comme ce post X" plutôt que "ton percutant".</li>
+          <li><strong>Demande explicitement le format</strong> : "réponds en 5 bullets max" ou "en tableau".</li>
+          <li><strong>Itère</strong>, ne cherche pas la perfection au 1<sup>er</sup> coup. 3 allers-retours valent mieux qu'un mega-prompt.</li>
+          <li><strong>Challenge la sortie</strong> : "qu'est-ce qui pourrait être faux dans ce que tu viens de dire ?"</li>
+        </ol>
       </article>
 
-      <!-- Phase 4 -->
-      <article class="phase">
-        <div class="phase__num" aria-hidden="true">4</div>
-        <div class="phase__header">
-          <div class="phase__title">Automatisation légère</div>
-          <span class="phase__duration">Semaines 7-9</span>
-        </div>
-        <ul>
-          <li><strong>MCP servers</strong> : connecter LinkedIn, Meta Ads (si stage), Google Analytics. Claude lit et génère reporting.</li>
-          <li><strong>Cowork</strong> (desktop app Claude) : un dossier « Livrables clients », Claude écrit/met à jour les fichiers.</li>
-          <li><strong>API Nano Banana 2</strong> via AI Studio pour production en volume si projet de stage l'exige.</li>
+      <article class="card">
+        <h3 style="margin-top:0">Hygiène données</h3>
+        <ul style="margin: 0; padding-left: 1.25rem;">
+          <li><strong>Jamais</strong> dans un prompt : NDA, données clients identifiables, identifiants, mots de passe, numéros de carte.</li>
+          <li>Tout ce que tu colles part dans le cloud Anthropic. Computer Use voit ton écran quand il est actif — désactive-le quand tu ne l'utilises pas.</li>
+          <li>En stage : <strong>déclare</strong> à ton tuteur que tu utilises l'IA. C'est attendu en 2026, le cacher se voit.</li>
+          <li>Pour les devoirs notés sans déclaration autorisée : ne le fais pas. Pour t'entraîner ou structurer ta pensée : oui.</li>
         </ul>
-        <div class="deliverable">
-          <span class="deliverable__icon" aria-hidden="true">✓</span>
-          <div><strong>Livrable de phase :</strong> un workflow Cowork qui produit un livrable récurrent (reporting hebdo, post planifié, etc.).</div>
-        </div>
       </article>
 
-      <!-- Phase 5 -->
-      <article class="phase">
-        <div class="phase__num" aria-hidden="true">5</div>
-        <div class="phase__header">
-          <div class="phase__title">Agents avancés</div>
-          <span class="phase__duration">Mois 3+</span>
-        </div>
-        <ul>
-          <li><strong>Computer Use</strong> (Claude) : automatiser des tâches navigateur (veille concurrentielle, planification posts). Plus simple et moins risqué qu'OpenClaw.</li>
-          <li>
-            <strong>OpenClaw</strong> uniquement si :
-            <ul>
-              <li>Docker / CLI maîtrisés.</li>
-              <li>Mac mini ou VPS dédié.</li>
-              <li>Budget API 30-50 $/mois en plus.</li>
-              <li>Cas d'usage légitime : agent qui orchestre canaux WhatsApp/Telegram, traite mails de candidature.</li>
-            </ul>
-          </li>
-          <li><strong>Sinon</strong> : rester sur Cowork + Computer Use, qui couvrent 80 % du besoin sans le risque sécurité.</li>
+      <article class="card">
+        <h3 style="margin-top:0">Vérification des chiffres</h3>
+        <p>L'IA peut halluciner — sortir un chiffre crédible mais faux. Réflexe : <strong>tout chiffre cité dans un livrable pro doit avoir une source vérifiable</strong>. NotebookLM affiche les sources par défaut, Claude pas. Quand tu utilises Claude pour des stats, demande-lui explicitement les sources et vérifie-les avant de les inscrire.</p>
+      </article>
+
+      <article class="card">
+        <h3 style="margin-top:0">Sauvegarde &amp; persistance</h3>
+        <ul style="margin: 0; padding-left: 1.25rem;">
+          <li><strong>Conversations Claude</strong> : sauvegardées sur ton compte, sync cloud. Visibles sur tous tes devices.</li>
+          <li><strong>Projects</strong> : pareil, plus les fichiers de contexte que tu y déposes.</li>
+          <li><strong>Fichiers Cowork</strong> : ils vivent sur <em>ton</em> disque, dans le dossier que tu lui as donné. Si tu l'effaces, c'est perdu — comme tout fichier local.</li>
+          <li><strong>Conseil</strong> : pour les projets sérieux, mets le dossier Cowork sous git (même un repo perso GitHub). Tu auras l'historique gratis.</li>
         </ul>
+      </article>
+
+      <article class="card">
+        <h3 style="margin-top:0">5 prompts marketing prêts à copier</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Colle dans Claude, remplace les <code>[crochets]</code>. Ce sont des points de départ : itère.</p>
+
+        <span class="prompt-label">1. Persona produit</span>
+<pre class="prompt">Tu es expert marketing B2C. À partir de la description ci-dessous, génère :
+1. Un persona principal (nom, âge, métier, frustrations, désirs, canaux).
+2. Une journée type avec les moments-clés où le produit pourrait s'insérer.
+3. Trois objections probables.
+
+Produit : [description]
+Cible déclarée : [si tu en as une]
+Marché : [zone géo et secteur]</pre>
+
+        <span class="prompt-label">2. Brief créa pour agence</span>
+<pre class="prompt">Rédige un brief créa pour une campagne [type : print / social / vidéo].
+Format : 1 page max, sections — Contexte, Objectif business, Insight conso,
+Promesse, Ton de marque, Mandatories, KPI, Délai, Budget.
+Sois concret, évite le jargon vide.
+
+Marque : [nom]
+Produit : [bref]
+Audience : [cible]
+Objectif business : [ex. +15 % de notoriété en 6 mois]</pre>
+
+        <span class="prompt-label">3. Audit landing page</span>
+<pre class="prompt">Audite la landing page suivante en 6 axes : proposition de valeur,
+hiérarchie visuelle, preuves sociales, CTA, friction, mobile.
+Pour chaque axe, donne 1 verdict (OK / À améliorer / Critique) et
+1 recommandation actionnable. À la fin, top 3 priorités.
+
+URL ou contenu : [colle ici]</pre>
+
+        <span class="prompt-label">4. Post LinkedIn (étudiant en stage)</span>
+<pre class="prompt">Rédige un post LinkedIn de 800-1000 caractères sur [sujet].
+Style : sobre, pas de "🚀", pas d'enfilade d'émojis, pas de "thread".
+Ouverture forte (pas de "Aujourd'hui je suis fier..."). Une idée par phrase.
+Termine par une question ouverte qui invite à commenter.
+
+Contexte : étudiant marketing digital en stage chez [boîte]
+Sujet : [ce que tu veux raconter]
+Angle perso : [ce que tu as appris ou observé]</pre>
+
+        <span class="prompt-label">5. Analyse SWOT d'une campagne concurrente</span>
+<pre class="prompt">Analyse en SWOT la campagne suivante. Pour chaque case, 3 points max.
+Ajoute en conclusion : "Si j'étais le concurrent direct, je ferais X"
+en 2 phrases.
+
+Marque : [nom]
+Campagne : [titre + canaux + dates]
+Liens / contenus que je te fournis : [colle]</pre>
       </article>
 
     </div>
   </section>
 
   <!-- ============================================================
-       4.4 Pièges à éviter — 5 cards-warning
-       ============================================================ -->
-  <section class="container" aria-labelledby="pieges-title">
-    <span class="kicker">Vigilance</span>
-    <h2 id="pieges-title">Pièges à éviter</h2>
-    <p class="lede">Cinq erreurs typiques quand on découvre 4 IA et un agent open-source en même temps.</p>
-
-    <div class="warnings">
-
-      <div class="warning">
-        <span class="warning__icon" aria-hidden="true">
-          <!-- Icône triangle d'alerte (SVG inline) -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </span>
-        <p class="warning__body"><strong>Empiler les outils sans logique.</strong> 4 piliers, pas 12. Chaque outil a un rôle distinct.</p>
-      </div>
-
-      <div class="warning">
-        <span class="warning__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </span>
-        <p class="warning__body"><strong>OpenClaw en point d'entrée.</strong> Cisco et BitSight signalent des risques de prompt injection majeurs. Docker ou VM obligatoires. Pas avant 3 mois de pratique.</p>
-      </div>
-
-      <div class="warning">
-        <span class="warning__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </span>
-        <p class="warning__body"><strong>Confondre Claude Design et Claude Code.</strong> Claude Design = produit web visuel. Claude Code = agent CLI pour développer. Complémentaires, pas substituables.</p>
-      </div>
-
-      <div class="warning">
-        <span class="warning__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </span>
-        <p class="warning__body"><strong>Négliger le dossier de contexte.</strong> Sans <code>about-me</code> et <code>style-redaction</code>, Claude tombe dans le ton IA générique.</p>
-      </div>
-
-      <div class="warning">
-        <span class="warning__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </span>
-        <p class="warning__body"><strong>Vouloir tout automatiser semaine 1.</strong> Les agents valent quelque chose seulement quand le workflow manuel est déjà rodé.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================
-       4.5 Lecture stratégique — citation
-       ============================================================ -->
-  <section class="container" aria-labelledby="strategy-title">
-    <span class="kicker">Lecture stratégique</span>
-    <h2 id="strategy-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Lecture stratégique</h2>
-
-    <div class="strategy">
-      <blockquote>
-        Le piège classique pour un étudiant face à 4 IA + 1 agent open-source : disperser ses efforts. Le vrai différenciant en 2026 ne sera pas « savoir utiliser X outil » — c'est arbitrer intelligemment entre eux selon la tâche. C'est ça qu'il faut afficher en entretien de stage.
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       4.6 Footer — date + mention
+       Footer
        ============================================================ -->
   <footer class="container">
     <p class="footer__date">Mercredi 06/05/2026</p>
-    <p>Document de référence — à reconsulter à chaque fin de phase.</p>
+    <p>Mode d'emploi vivant — relis-le quand tu ajoutes une compétence ou un connecteur.</p>
   </footer>
 
 </body>
