@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadmap IA — 12 semaines</title>
+  <meta name="description" content="Roadmap pragmatique sur 12 semaines pour intégrer Claude et les agents IA à une stack marketing digital existante (ChatGPT, Gemini, NotebookLM).">
+  <meta name="color-scheme" content="light">
+
+  <!-- Google Fonts : Inter pour le corps, JetBrains Mono pour le code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Tokens — palette Claude Design (light, sobre)
+       ========================================================= */
+    :root {
+      --bg:            #FAFAF7;  /* fond principal off-white */
+      --surface:       #FFFFFF;  /* fond cards */
+      --text:          #1A1A1A;  /* texte principal */
+      --text-muted:    #6B7280;  /* texte secondaire */
+      --accent:        #D97757;  /* orange Anthropic */
+      --warning:       #F59E0B;  /* ambre */
+      --border:        #E5E7EB;  /* bordures */
+
+      --accent-soft:   rgba(217, 119, 87, 0.10);
+      --warning-soft:  rgba(245, 158, 11, 0.08);
+
+      --radius:        12px;
+      --radius-sm:     8px;
+      --shadow:        0 1px 3px rgba(0, 0, 0, 0.05);
+
+      --max-width:     880px;
+      --pad-x:         24px;
+      --gap-section:   40px;
+
+      --font-sans:     'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono:     'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    @media (min-width: 768px) {
+      :root {
+        --pad-x:       48px;
+        --gap-section: 64px;
+      }
+    }
+
+    /* =========================================================
+       Reset minimal + base
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Conteneur centré */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
+    }
+
+    /* Typo */
+    h1, h2, h3 { color: var(--text); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin: 0; }
+    h1 { font-size: clamp(2rem, 4.2vw + 1rem, 3rem); }
+    h2 { font-size: clamp(1.5rem, 2vw + 1rem, 2rem); margin-bottom: 1rem; }
+    h3 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+    p  { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    a  { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: var(--font-mono); font-size: 0.92em; background: var(--accent-soft); color: var(--accent); padding: 0.1em 0.35em; border-radius: 4px; }
+    strong { font-weight: 600; }
+
+    /* Espacement vertical entre sections */
+    section { padding-top: var(--gap-section); padding-bottom: 0; }
+    section:last-of-type { padding-bottom: var(--gap-section); }
+
+    /* =========================================================
+       Hero
+       ========================================================= */
+    .hero {
+      padding-top: clamp(48px, 8vw, 96px);
+      padding-bottom: 8px;
+    }
+    .hero__subtitle {
+      color: var(--text-muted);
+      font-size: clamp(1rem, 0.8vw + 0.85rem, 1.125rem);
+      max-width: 640px;
+      margin-top: 1.25rem;
+    }
+    .hero__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1.75rem;
+    }
+
+    /* Badge pilule (accent doux) */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.005em;
+    }
+
+    /* Section heading kicker (petit label au-dessus du h2) */
+    .kicker {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .lede {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-top: 0.5rem;
+    }
+
+    /* =========================================================
+       Cards génériques
+       ========================================================= */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    /* =========================================================
+       Section "4 piliers" — grille de cards
+       ========================================================= */
+    .pillars {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
+      margin-top: 1.5rem;
+    }
+    @media (min-width: 560px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .pillars { grid-template-columns: repeat(4, 1fr); } }
+
+    .pillar__role     { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+    .pillar__title    { margin-top: 6px; }
+    .pillar__tool     { margin-top: 8px; font-size: 0.95rem; color: var(--text); font-weight: 500; }
+    .pillar__desc     { margin-top: 8px; font-size: 0.9rem; color: var(--text-muted); }
+    .pillar__cost     { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 600; }
+    .pillar__cost span { color: var(--text-muted); font-weight: 500; }
+
+    /* Encart "Total" sous la grille */
+    .total-banner {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+    }
+    .total-banner strong { color: var(--accent); }
+
+    /* =========================================================
+       Timeline des 5 phases
+       ========================================================= */
+    .timeline {
+      position: relative;
+      margin-top: 1.5rem;
+      padding-left: 44px; /* place pour le trait + pastille */
+    }
+    /* Trait vertical */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .phase { position: relative; margin-bottom: 36px; }
+    .phase:last-child { margin-bottom: 0; }
+
+    /* Pastille numérotée sur le trait */
+    .phase__num {
+      position: absolute;
+      left: -44px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+    }
+
+    .phase__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px 12px;
+      margin-bottom: 6px;
+    }
+    .phase__title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
+    .phase__duration {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: var(--surface);
+    }
+
+    .phase__intro { color: var(--text-muted); margin-top: 4px; }
+
+    .phase ul {
+      margin: 12px 0 0;
+      padding-left: 1.25rem;
+    }
+    .phase li { margin-bottom: 6px; }
+    .phase li::marker { color: var(--text-muted); }
+
+    /* Bloc "livrable de phase" */
+    .deliverable {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .deliverable__icon {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .deliverable strong { color: var(--accent); }
+
+    /* =========================================================
+       Tableaux (utilisés dans Phase 2)
+       ========================================================= */
+    .table-wrap {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow-x: auto;       /* horizontal scroll si vraiment nécessaire en mobile */
+      background: var(--surface);
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 560px;       /* garantit la lisibilité du tableau */
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+    thead th {
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg);
+    }
+    tbody tr:nth-child(even) td { background: rgba(0, 0, 0, 0.015); }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    /* =========================================================
+       Pièges à éviter — cards-warning
+       ========================================================= */
+    .warnings {
+      display: grid;
+      gap: 12px;
+      margin-top: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    .warning {
+      background: var(--warning-soft);
+      border: 1px solid rgba(245, 158, 11, 0.18);
+      border-left: 3px solid var(--warning);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .warning__icon {
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      color: var(--warning);
+    }
+    .warning__icon svg { display: block; width: 100%; height: 100%; }
+    .warning__body { font-size: 0.95rem; }
+    .warning__body strong { color: var(--text); font-weight: 600; }
+
+    /* =========================================================
+       Citation / lecture stratégique
+       ========================================================= */
+    .strategy {
+      margin-top: 1.5rem;
+      padding: 24px 28px;
+      background: #F3F3EF;          /* gris très clair, légèrement plus chaud que le fond */
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .strategy blockquote {
+      margin: 0;
+      font-style: italic;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 680px;
+    }
+    .strategy blockquote::before {
+      content: "“";
+      font-family: var(--font-sans);
+      font-size: 2.25rem;
+      line-height: 0;
+      color: var(--accent);
+      margin-right: 6px;
+      vertical-align: -0.4em;
+    }
+
+    /* =========================================================
+       Footer
+       ========================================================= */
+    footer {
+      margin-top: var(--gap-section);
+      padding-top: 24px;
+      padding-bottom: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    footer p { margin: 0; }
+    footer .footer__date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       Accessibilité — focus visible
+       ========================================================= */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       4.1 Hero — H1, sous-titre, 2 badges
+       ============================================================ -->
+  <header class="hero container">
+    <h1>Maîtriser l'IA en 12 semaines</h1>
+    <p class="hero__subtitle">
+      Roadmap pragmatique pour un étudiant marketing digital qui connaît déjà ChatGPT et Gemini, et veut intégrer Claude + les agents IA sans se disperser.
+    </p>
+    <div class="hero__badges">
+      <span class="badge">Profil : étudiant marketing digital, 21 ans</span>
+      <span class="badge">Posture : arbitrer, pas accumuler</span>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       4.2 La stack à 4 piliers — grille responsive 4/2/1 cols
+       ============================================================ -->
+  <section class="container" aria-labelledby="piliers-title">
+    <span class="kicker">Stack</span>
+    <h2 id="piliers-title">La stack à 4 piliers</h2>
+    <p class="lede">Quatre outils, quatre rôles distincts. Aucun cumul gratuit : chacun fait ce que les autres font moins bien.</p>
+
+    <div class="pillars">
+      <!-- Pilier 1 -->
+      <article class="card pillar">
+        <div class="pillar__role">Rédaction &amp; raisonnement</div>
+        <h3 class="pillar__title">Claude Pro</h3>
+        <div class="pillar__tool">Opus 4.7</div>
+        <p class="pillar__desc">Moteur principal : analyse, rédaction, Artifacts, Projects, Claude Design.</p>
+        <div class="pillar__cost">20 $ <span>/ mois</span></div>
+      </article>
+      <!-- Pilier 2 -->
+      <article class="card pillar">
+        <div class="pillar__role">Visuels avec texte</div>
+        <h3 class="pillar__title">ChatGPT Plus</h3>
+        <div class="pillar__tool">GPT Image 2</div>
+        <p class="pillar__desc">Mockups marketing, infographies, social avec texte propre, batches cohérents.</p>
+        <div class="pillar__cost">20 $ <span>/ mois</span></div>
+      </article>
+      <!-- Pilier 3 -->
+      <article class="card pillar">
+        <div class="pillar__role">Édition visuelle rapide</div>
+        <h3 class="pillar__title">Gemini AI Pro</h3>
+        <div class="pillar__tool">Nano Banana 2</div>
+        <p class="pillar__desc">Édition photo, intégration Google Photos perso, multi-langues.</p>
+        <div class="pillar__cost">~22 $ <span>/ mois</span></div>
+      </article>
+      <!-- Pilier 4 -->
+      <article class="card pillar">
+        <div class="pillar__role">Veille sourcée</div>
+        <h3 class="pillar__title">NotebookLM</h3>
+        <div class="pillar__tool">inclus dans Gemini</div>
+        <p class="pillar__desc">Q&amp;R sur cours et études, podcasts audio depuis ses docs.</p>
+        <div class="pillar__cost">inclus</div>
+      </article>
+    </div>
+
+    <p class="total-banner">
+      <strong>Total : ~62 $/mois</strong> — justifié par la complémentarité, pas par le cumul.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       4.3 Les 5 phases — timeline verticale
+       ============================================================ -->
+  <section class="container" aria-labelledby="phases-title">
+    <span class="kicker">Roadmap</span>
+    <h2 id="phases-title">Les 5 phases</h2>
+    <p class="lede">Douze semaines de fondations, puis une montée en autonomie. À chaque phase, un livrable concret.</p>
+
+    <div class="timeline">
+
+      <!-- Phase 1 -->
+      <article class="phase">
+        <div class="phase__num" aria-hidden="true">1</div>
+        <div class="phase__header">
+          <div class="phase__title">Fondations Claude</div>
+          <span class="phase__duration">Semaines 1-2</span>
+        </div>
+        <ul>
+          <li>S'abonner à Claude Pro.</li>
+          <li>Créer un <strong>dossier de contexte</strong> (3 fichiers <code>.md</code> &lt; 2000 mots) : <code>about-me</code>, <code>projets-marketing</code>, <code>style-redaction</code>.</li>
+          <li>Premier <strong>Project Claude</strong> : « Études marketing digital ».</li>
+          <li>Tester les <strong>Artifacts</strong> sur 3 cas concrets (mockup landing, post LinkedIn, analyse SWOT).</li>
+        </ul>
+        <div class="deliverable">
+          <span class="deliverable__icon" aria-hidden="true">✓</span>
+          <div><strong>Livrable de phase :</strong> un Project Claude opérationnel + 3 artifacts produits.</div>
+        </div>
+      </article>
+
+      <!-- Phase 2 -->
+      <article class="phase">
+        <div class="phase__num" aria-hidden="true">2</div>
+        <div class="phase__header">
+          <div class="phase__title">Création visuelle multi-modèles</div>
+          <span class="phase__duration">Semaines 3-4</span>
+        </div>
+        <p class="phase__intro">L'arbitrage entre les 3 modèles d'image est la compétence-clé.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Besoin</th>
+                <th scope="col">Outil à utiliser</th>
+                <th scope="col">Pourquoi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Visuel social avec texte intégré</td>
+                <td>GPT Image 2 thinking mode</td>
+                <td>Rendu texte le plus précis du marché en avril 2026</td>
+              </tr>
+              <tr>
+                <td>Édition rapide d'une photo perso</td>
+                <td>Nano Banana 2</td>
+                <td>Personal Intelligence + Google Photos</td>
+              </tr>
+              <tr>
+                <td>Mockup app / landing / prototype interactif</td>
+                <td>Claude Design</td>
+                <td>Export HTML, sliders d'ajustement, design system</td>
+              </tr>
+              <tr>
+                <td>Copy autour du visuel</td>
+                <td>Claude Artifacts</td>
+                <td>Qualité rédactionnelle</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top: 14px;"><strong>Exercice de phase :</strong> reproduire une vraie campagne (Apple, Spotify, Nike) avec les 3 outils, comparer.</p>
+
+        <div class="deliverable">
+          <span class="deliverable__icon" aria-hidden="true">✓</span>
+          <div><strong>Livrable de phase :</strong> un comparatif visuel des 3 modèles sur le même brief.</div>
+        </div>
+      </article>
+
+      <!-- Phase 3 -->
+      <article class="phase">
+        <div class="phase__num" aria-hidden="true">3</div>
+        <div class="phase__header">
+          <div class="phase__title">Veille et savoir</div>
+          <span class="phase__duration">Semaines 5-6</span>
+        </div>
+        <ul>
+          <li>Créer un notebook NotebookLM « Veille marketing 2026 » avec études McKinsey, rapports HubSpot, articles Stratégies.</li>
+          <li>Activer le <strong>podcast audio</strong> pour écoute en marchant.</li>
+          <li>Premiers <strong>Skills Claude</strong> : <code>/post-linkedin</code>, <code>/brief-créa</code>, <code>/analyse-campagne</code>.</li>
+          <li>Connecter Google Drive et Gmail à Claude.</li>
+        </ul>
+        <div class="deliverable">
+          <span class="deliverable__icon" aria-hidden="true">✓</span>
+          <div><strong>Livrable de phase :</strong> 3 Skills opérationnels + 1 notebook NotebookLM nourri.</div>
+        </div>
+      </article>
+
+      <!-- Phase 4 -->
+      <article class="phase">
+        <div class="phase__num" aria-hidden="true">4</div>
+        <div class="phase__header">
+          <div class="phase__title">Automatisation légère</div>
+          <span class="phase__duration">Semaines 7-9</span>
+        </div>
+        <ul>
+          <li><strong>MCP servers</strong> : connecter LinkedIn, Meta Ads (si stage), Google Analytics. Claude lit et génère reporting.</li>
+          <li><strong>Cowork</strong> (desktop app Claude) : un dossier « Livrables clients », Claude écrit/met à jour les fichiers.</li>
+          <li><strong>API Nano Banana 2</strong> via AI Studio pour production en volume si projet de stage l'exige.</li>
+        </ul>
+        <div class="deliverable">
+          <span class="deliverable__icon" aria-hidden="true">✓</span>
+          <div><strong>Livrable de phase :</strong> un workflow Cowork qui produit un livrable récurrent (reporting hebdo, post planifié, etc.).</div>
+        </div>
+      </article>
+
+      <!-- Phase 5 -->
+      <article class="phase">
+        <div class="phase__num" aria-hidden="true">5</div>
+        <div class="phase__header">
+          <div class="phase__title">Agents avancés</div>
+          <span class="phase__duration">Mois 3+</span>
+        </div>
+        <ul>
+          <li><strong>Computer Use</strong> (Claude) : automatiser des tâches navigateur (veille concurrentielle, planification posts). Plus simple et moins risqué qu'OpenClaw.</li>
+          <li>
+            <strong>OpenClaw</strong> uniquement si :
+            <ul>
+              <li>Docker / CLI maîtrisés.</li>
+              <li>Mac mini ou VPS dédié.</li>
+              <li>Budget API 30-50 $/mois en plus.</li>
+              <li>Cas d'usage légitime : agent qui orchestre canaux WhatsApp/Telegram, traite mails de candidature.</li>
+            </ul>
+          </li>
+          <li><strong>Sinon</strong> : rester sur Cowork + Computer Use, qui couvrent 80 % du besoin sans le risque sécurité.</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4.4 Pièges à éviter — 5 cards-warning
+       ============================================================ -->
+  <section class="container" aria-labelledby="pieges-title">
+    <span class="kicker">Vigilance</span>
+    <h2 id="pieges-title">Pièges à éviter</h2>
+    <p class="lede">Cinq erreurs typiques quand on découvre 4 IA et un agent open-source en même temps.</p>
+
+    <div class="warnings">
+
+      <div class="warning">
+        <span class="warning__icon" aria-hidden="true">
+          <!-- Icône triangle d'alerte (SVG inline) -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        <p class="warning__body"><strong>Empiler les outils sans logique.</strong> 4 piliers, pas 12. Chaque outil a un rôle distinct.</p>
+      </div>
+
+      <div class="warning">
+        <span class="warning__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        <p class="warning__body"><strong>OpenClaw en point d'entrée.</strong> Cisco et BitSight signalent des risques de prompt injection majeurs. Docker ou VM obligatoires. Pas avant 3 mois de pratique.</p>
+      </div>
+
+      <div class="warning">
+        <span class="warning__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        <p class="warning__body"><strong>Confondre Claude Design et Claude Code.</strong> Claude Design = produit web visuel. Claude Code = agent CLI pour développer. Complémentaires, pas substituables.</p>
+      </div>
+
+      <div class="warning">
+        <span class="warning__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        <p class="warning__body"><strong>Négliger le dossier de contexte.</strong> Sans <code>about-me</code> et <code>style-redaction</code>, Claude tombe dans le ton IA générique.</p>
+      </div>
+
+      <div class="warning">
+        <span class="warning__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        <p class="warning__body"><strong>Vouloir tout automatiser semaine 1.</strong> Les agents valent quelque chose seulement quand le workflow manuel est déjà rodé.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4.5 Lecture stratégique — citation
+       ============================================================ -->
+  <section class="container" aria-labelledby="strategy-title">
+    <span class="kicker">Lecture stratégique</span>
+    <h2 id="strategy-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Lecture stratégique</h2>
+
+    <div class="strategy">
+      <blockquote>
+        Le piège classique pour un étudiant face à 4 IA + 1 agent open-source : disperser ses efforts. Le vrai différenciant en 2026 ne sera pas « savoir utiliser X outil » — c'est arbitrer intelligemment entre eux selon la tâche. C'est ça qu'il faut afficher en entretien de stage.
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4.6 Footer — date + mention
+       ============================================================ -->
+  <footer class="container">
+    <p class="footer__date">Mercredi 06/05/2026</p>
+    <p>Document de référence — à reconsulter à chaque fin de phase.</p>
+  </footer>
+
+</body>
+</html>
