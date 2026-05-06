@@ -568,6 +568,157 @@
       outline-offset: 2px;
       border-radius: 4px;
     }
+
+    /* =========================================================
+       Glossaire — termes annotables avec tooltip
+       ========================================================= */
+    .term {
+      border-bottom: 1px dotted var(--accent);
+      cursor: help;
+      position: relative;
+    }
+    .term:hover, .term:focus { color: var(--accent); }
+    .glossary-tip {
+      position: absolute;
+      z-index: 200;
+      max-width: 280px;
+      padding: 10px 12px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      line-height: 1.45;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .15s, transform .15s;
+    }
+    .glossary-tip.is-visible { opacity: 1; transform: translateY(0); }
+    .glossary-tip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: var(--arrow-x, 50%);
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--text);
+    }
+    .glossary-tip strong { color: var(--accent); display: block; margin-bottom: 2px; }
+
+    /* =========================================================
+       Mode présentation — une étape par slide
+       ========================================================= */
+    .present-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 150;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+    }
+    .is-presentation .present-bar { display: inline-flex; }
+    .present-bar__btn {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: color .15s, border-color .15s;
+    }
+    .present-bar__btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+    .present-bar__btn:disabled { opacity: .35; cursor: not-allowed; }
+    .present-bar__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .present-bar__counter {
+      font: 500 0.85rem/1 var(--font-sans);
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      min-width: 36px;
+      text-align: center;
+    }
+    .present-bar__exit {
+      font: 500 0.8rem/1 var(--font-sans);
+      color: var(--text-muted);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .present-bar__exit:hover { color: var(--accent); }
+
+    .is-presentation { overflow: hidden; }
+    .is-presentation .scroll-progress,
+    .is-presentation .toc,
+    .is-presentation .toolbar,
+    .is-presentation .hero,
+    .is-presentation footer { display: none !important; }
+    .is-presentation main > section.container { display: none; }
+    .is-presentation main > section.container.is-current-slide {
+      display: block;
+      min-height: 100vh;
+      padding-top: 48px;
+      padding-bottom: 96px;
+      animation: slideIn .25s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .is-presentation main > section.container.is-current-slide { animation: none; }
+    }
+
+    /* =========================================================
+       Print — version imprimable propre
+       ========================================================= */
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --surface-soft: #f5f5f5;
+        --text: #000000;
+        --text-muted: #444444;
+        --border: #cccccc;
+        --shadow: none;
+      }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      .scroll-progress, .toc, .toolbar, .copy-btn, .present-bar,
+      .substep__check, .glossary-tip { display: none !important; }
+      header.hero { padding: 0 0 12pt; border-bottom: 1px solid #999; margin-bottom: 12pt; }
+      .hero h1 { font-size: 22pt; margin: 0 0 4pt; }
+      .hero__subtitle { font-size: 11pt; }
+      .hero__badges { display: none; }
+      /* Force toutes les sections ouvertes */
+      details { display: block; }
+      details > summary { list-style: none; cursor: default; padding: 0; }
+      details > summary::-webkit-details-marker { display: none; }
+      details > summary .step-collapsible__chevron { display: none; }
+      details[open] > .step-collapsible__body, details > .step-collapsible__body { display: block !important; }
+      .step-collapsible { border-top: 0; padding-top: 0; }
+      .step-collapsible__title { font-size: 16pt; }
+      h3 { font-size: 12pt; margin-top: 14pt; }
+      .substep { display: block; margin-top: 14pt; }
+      .substep__title { display: inline; }
+      pre.prompt { background: #fafafa; border: 1px solid #ccc; font-size: 9pt; page-break-inside: avoid; }
+      .card, .tip, .warning { page-break-inside: avoid; border: 1px solid #ccc; }
+      a { color: #000; text-decoration: underline; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #555; }
+      .term { border-bottom: 0; }
+      section.container { page-break-inside: auto; }
+      footer { font-size: 9pt; color: #666; margin-top: 24pt; border-top: 1px solid #ccc; padding-top: 8pt; }
+    }
   </style>
 </head>
 <body>
@@ -617,9 +768,15 @@
         <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <span id="themeLabel">Sombre</span>
       </button>
+      <button type="button" class="toolbar__btn" id="presentBtn" aria-label="Lancer le mode présentation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Présenter
+      </button>
       <button type="button" class="toolbar__btn" id="toggleAll" aria-expanded="false">Tout déplier</button>
     </div>
   </div>
+
+  <main>
 
   <!-- ============================================================
        Étape 1 — Installer & s'abonner
@@ -657,8 +814,8 @@
     <div class="substep"><input type="checkbox" class="substep__check" id="chk-1-3" aria-labelledby="s-1-3"><h3 class="substep__title" id="s-1-3">1.3 — Tour rapide de l'interface</h3></div>
     <ul>
       <li><strong>Sidebar gauche</strong> : tes conversations récentes et tes Projects.</li>
-      <li><strong>Sélecteur de modèle</strong> (en haut de la zone de chat) : Sonnet par défaut, bascule sur Opus pour les tâches complexes.</li>
-      <li><strong>Bouton "Cowork"</strong> en haut de l'app : c'est là que tu actives le mode agent (cf. étape 4).</li>
+      <li><strong>Sélecteur de modèle</strong> (en haut de la zone de chat) : <span class="term" data-term="sonnet" tabindex="0">Sonnet</span> par défaut, bascule sur <span class="term" data-term="opus" tabindex="0">Opus</span> pour les tâches complexes.</li>
+      <li><strong>Bouton "<span class="term" data-term="cowork" tabindex="0">Cowork</span>"</strong> en haut de l'app : c'est là que tu actives le mode <span class="term" data-term="agent" tabindex="0">agent</span> (cf. étape 4).</li>
       <li><strong>Bouton + ou icône trombone</strong> dans la barre de saisie : joindre fichier, photo, ou lancer un Connecteur.</li>
       <li><strong>Settings (en bas à gauche, ton avatar)</strong> : profil, modèles, Connecteurs, Compétences, Plugins, Custom Instructions.</li>
     </ul>
@@ -745,7 +902,7 @@
     <!-- 3a Compétences -->
     <div class="substep"><input type="checkbox" class="substep__check" id="chk-3-1" aria-labelledby="s-3-1"><h3 class="substep__title" id="s-3-1">3.1 — Compétences (Skills)</h3></div>
     <p>
-      Une <strong>Compétence</strong> est un mini-mode d'emploi qu'on donne à Claude pour qu'il fasse une tâche bien précise et de façon répétable. Concrètement c'est un dossier avec un fichier <code>SKILL.md</code> qui décrit la marche à suivre, plus parfois des scripts. Claude la déclenche tout seul quand le contexte le justifie.
+      Une <strong><span class="term" data-term="skill" tabindex="0">Compétence</span></strong> est un mini-mode d'emploi qu'on donne à Claude pour qu'il fasse une tâche bien précise et de façon répétable. Concrètement c'est un dossier avec un fichier <code>SKILL.md</code> qui décrit la marche à suivre, plus parfois des scripts. Claude la déclenche tout seul quand le contexte le justifie.
     </p>
     <p><strong>Exemples utiles pour toi :</strong></p>
     <ul>
@@ -767,7 +924,7 @@
     <!-- 3b Connecteurs -->
     <div class="substep"><input type="checkbox" class="substep__check" id="chk-3-2" aria-labelledby="s-3-2"><h3 class="substep__title" id="s-3-2">3.2 — Connecteurs</h3></div>
     <p>
-      Un <strong>Connecteur</strong> donne à Claude l'accès à <em>un service ou une donnée</em>. Techniquement c'est un serveur MCP (Model Context Protocol). En pratique tu cliques, tu autorises, ça marche.
+      Un <strong><span class="term" data-term="connecteur" tabindex="0">Connecteur</span></strong> donne à Claude l'accès à <em>un service ou une donnée</em>. Techniquement c'est un serveur <span class="term" data-term="mcp" tabindex="0">MCP</span> (Model Context Protocol). En pratique tu cliques, tu autorises, ça marche.
     </p>
     <p><strong>Connecteurs prioritaires pour toi :</strong></p>
     <ul>
@@ -795,7 +952,7 @@
     <!-- 3c Plugins -->
     <div class="substep"><input type="checkbox" class="substep__check" id="chk-3-3" aria-labelledby="s-3-3"><h3 class="substep__title" id="s-3-3">3.3 — Plugins</h3></div>
     <p>
-      Un <strong>Plugin</strong> est un <em>bundle métier</em> de compétences et de commandes pré-configurées. Tu installes le plugin "Marketing" et Claude reçoit d'un coup un paquet de Compétences et de slash-commands liées à ce métier (par exemple <code>/persona</code>, <code>/brief-créa</code>, <code>/audit-landing</code>).
+      Un <strong><span class="term" data-term="plugin" tabindex="0">Plugin</span></strong> est un <em>bundle métier</em> de compétences et de commandes pré-configurées. Tu installes le plugin "Marketing" et Claude reçoit d'un coup un paquet de Compétences et de slash-commands liées à ce métier (par exemple <code>/persona</code>, <code>/brief-créa</code>, <code>/audit-landing</code>).
     </p>
     <p><strong>Les 11 plugins officiels</strong> couvrent : Ventes, Marketing, Juridique, Finance, Données, Produit, Support, etc. Pour toi, le bon départ c'est <strong>Marketing</strong>.</p>
     <h4>Installer un Plugin</h4>
@@ -828,7 +985,7 @@
 
     <h4>(b) Au niveau du Project — Claude.ai &amp; Desktop</h4>
     <p>
-      Un <strong>Project</strong> = un dossier de conversations + un système de prompt + des fichiers de contexte. Le system prompt du Project surclasse les instructions du compte sur ce projet.
+      Un <strong><span class="term" data-term="project" tabindex="0">Project</span></strong> = un dossier de conversations + un système de prompt + des fichiers de contexte. Le system prompt du Project surclasse les instructions du compte sur ce projet.
     </p>
     <p><strong>Cas d'usage :</strong></p>
     <ul>
@@ -1051,7 +1208,7 @@ Ne fais rien tant que nous ne sommes pas alignés.</pre>
     <div class="substep"><input type="checkbox" class="substep__check" id="chk-5-1" aria-labelledby="s-5-1"><h3 class="substep__title" id="s-5-1">Exemple narratif : audit de campagne d'un concurrent</h3></div>
     <ol class="steps">
       <li><strong>Grok</strong> : "Que dit X sur les dernières campagnes de [marque] ce mois-ci ?" → liste de signaux frais.</li>
-      <li><strong>NotebookLM</strong> : tu y déposes les études citées par Grok + 2 rapports Stratégies → fiche de synthèse sourcée.</li>
+      <li><strong><span class="term" data-term="notebooklm" tabindex="0">NotebookLM</span></strong> : tu y déposes les études citées par Grok + 2 rapports Stratégies → fiche de synthèse sourcée.</li>
       <li><strong>Claude</strong> (Project "Audit campagnes") : tu colles la fiche NotebookLM, demandes l'audit structuré (forces / faiblesses / opportunités).</li>
       <li><strong>GPT Image 2</strong> (gratuit) : visuel de couverture pour le livrable, avec le titre intégré dans l'image.</li>
       <li><strong>Cowork</strong> : tu fais générer la version finale Word/Markdown du livrable dans ton dossier.</li>
@@ -1188,6 +1345,19 @@ Liens / contenus que je te fournis : [colle]</pre>
 
     </div>
   </section>
+
+  </main>
+
+  <!-- Barre de contrôle du mode présentation -->
+  <div class="present-bar" role="toolbar" aria-label="Navigation présentation">
+    <button type="button" class="present-bar__btn" id="presentPrev" aria-label="Slide précédent">‹</button>
+    <span class="present-bar__counter" id="presentCounter">1/6</span>
+    <button type="button" class="present-bar__btn" id="presentNext" aria-label="Slide suivant">›</button>
+    <button type="button" class="present-bar__exit" id="presentExit">Quitter</button>
+  </div>
+
+  <!-- Tooltip glossaire (positionné dynamiquement par JS) -->
+  <div class="glossary-tip" id="glossaryTip" role="tooltip" aria-hidden="true"></div>
 
   <!-- ============================================================
        Footer
@@ -1365,6 +1535,117 @@ Liens / contenus que je te fournis : [colle]</pre>
         }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
         Object.keys(tocMap).forEach(function (id) { io.observe(tocMap[id].el); });
       }
+
+      // ---------- Glossaire interactif ----------
+      var glossary = {
+        cowork:     { title: 'Cowork', body: "Mode «agent» dans Claude Desktop : Claude lit, écrit et exécute dans un dossier de ton Mac, étape par étape, avec ta validation à chaque action." },
+        agent:      { title: 'Agent', body: "Une IA qui n'attend pas que tu copies-colles : elle agit elle-même (lit un fichier, modifie un .md, lance une commande), avec ton accord. Le saut clé par rapport au chatbot." },
+        skill:      { title: 'Compétence (Skill)', body: "Mini mode d'emploi pour Claude (un dossier + un fichier SKILL.md). Déclenché automatiquement quand le contexte le justifie. Exemples : /persona, /brief-créa." },
+        plugin:     { title: 'Plugin', body: "Bundle métier de Compétences et de slash-commands pré-configurées. Tu installes «Marketing», tu reçois /persona, /brief-créa, /audit-landing d'un coup." },
+        connecteur: { title: 'Connecteur', body: "Accès donné à Claude vers un service externe (Drive, Gmail, Notion…). Tu cliques, tu autorises (OAuth), ça marche. Techniquement c'est un serveur MCP." },
+        mcp:        { title: 'MCP', body: "Model Context Protocol — le standard ouvert qui permet à Claude (et d'autres IA) de se brancher à des outils externes. Tous les Connecteurs sont des serveurs MCP." },
+        project:    { title: 'Project', body: "Dossier de conversations + system prompt + fichiers de contexte. Le system prompt du Project surclasse les instructions du compte sur ce projet." },
+        sonnet:     { title: 'Claude Sonnet', body: "Le modèle «équilibré» : rapide, intelligent, conomique en quotas. C'est ton modèle par défaut pour 90 % des tâches du quotidien." },
+        opus:       { title: 'Claude Opus', body: "Le modèle «profond» : plus lent, plus coûteux en quotas, mais imbattable sur le raisonnement complexe (analyse stratégique, code lourd, redaction longue)." },
+        notebooklm: { title: 'NotebookLM', body: "Outil Google de prise de notes augmentée par IA. Tu déposes des sources (PDF, vidéos, articles), il te génère résumés, fiches et podcasts — avec citations sourcées." }
+      };
+      var tip = document.getElementById('glossaryTip');
+      var activeTerm = null;
+      function showTip(termEl) {
+        if (!tip || !termEl) return;
+        var key = termEl.getAttribute('data-term');
+        var entry = glossary[key];
+        if (!entry) return;
+        tip.innerHTML = '<strong>' + entry.title + '</strong>' + entry.body;
+        tip.classList.add('is-visible');
+        tip.setAttribute('aria-hidden', 'false');
+        var rect = termEl.getBoundingClientRect();
+        var tipRect = tip.getBoundingClientRect();
+        var top = window.scrollY + rect.top - tipRect.height - 10;
+        var left = window.scrollX + rect.left + rect.width / 2 - tipRect.width / 2;
+        // garde le tooltip dans le viewport horizontalement
+        var minLeft = window.scrollX + 8;
+        var maxLeft = window.scrollX + window.innerWidth - tipRect.width - 8;
+        var clamped = Math.max(minLeft, Math.min(maxLeft, left));
+        // Ajuste la flèche si le tooltip a été repoussé
+        var idealCenterX = window.scrollX + rect.left + rect.width / 2;
+        var arrowX = idealCenterX - clamped;
+        tip.style.setProperty('--arrow-x', arrowX + 'px');
+        tip.style.top = top + 'px';
+        tip.style.left = clamped + 'px';
+        activeTerm = termEl;
+      }
+      function hideTip() {
+        if (!tip) return;
+        tip.classList.remove('is-visible');
+        tip.setAttribute('aria-hidden', 'true');
+        activeTerm = null;
+      }
+      var terms = document.querySelectorAll('.term');
+      Array.prototype.forEach.call(terms, function (t) {
+        t.addEventListener('mouseenter', function () { showTip(t); });
+        t.addEventListener('mouseleave', hideTip);
+        t.addEventListener('focus', function () { showTip(t); });
+        t.addEventListener('blur', hideTip);
+        t.addEventListener('click', function (e) {
+          if (activeTerm === t) { hideTip(); }
+          else { showTip(t); e.stopPropagation(); }
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (activeTerm && !e.target.classList.contains('term')) hideTip();
+      });
+      window.addEventListener('scroll', hideTip, { passive: true });
+      window.addEventListener('resize', hideTip);
+
+      // ---------- Mode présentation ----------
+      var presentBtn = document.getElementById('presentBtn');
+      var presentPrev = document.getElementById('presentPrev');
+      var presentNext = document.getElementById('presentNext');
+      var presentExit = document.getElementById('presentExit');
+      var presentCounter = document.getElementById('presentCounter');
+      var slideTitleIds = ['step1-title', 'step2-title', 'step3-title', 'step4-title', 'step5-title', 'prat-title'];
+      var slides = slideTitleIds
+        .map(function (id) { var el = document.getElementById(id); return el ? el.closest('section.container') : null; })
+        .filter(Boolean);
+      var currentSlide = 0;
+      var isPresent = false;
+
+      function showSlide(i) {
+        currentSlide = Math.max(0, Math.min(slides.length - 1, i));
+        slides.forEach(function (s, idx) {
+          s.classList.toggle('is-current-slide', idx === currentSlide);
+        });
+        if (presentCounter) presentCounter.textContent = (currentSlide + 1) + '/' + slides.length;
+        if (presentPrev) presentPrev.disabled = currentSlide === 0;
+        if (presentNext) presentNext.disabled = currentSlide === slides.length - 1;
+        window.scrollTo(0, 0);
+      }
+      function enterPresent() {
+        if (!slides.length) return;
+        isPresent = true;
+        document.body.classList.add('is-presentation');
+        // ouvre tous les details pour que le contenu soit visible
+        Array.prototype.forEach.call(steps, function (s) { s.open = true; });
+        showSlide(0);
+        document.addEventListener('keydown', presentKey);
+      }
+      function exitPresent() {
+        isPresent = false;
+        document.body.classList.remove('is-presentation');
+        slides.forEach(function (s) { s.classList.remove('is-current-slide'); });
+        document.removeEventListener('keydown', presentKey);
+      }
+      function presentKey(e) {
+        if (!isPresent) return;
+        if (e.key === 'Escape') { exitPresent(); }
+        else if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); showSlide(currentSlide + 1); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); showSlide(currentSlide - 1); }
+      }
+      if (presentBtn) presentBtn.addEventListener('click', enterPresent);
+      if (presentPrev) presentPrev.addEventListener('click', function () { showSlide(currentSlide - 1); });
+      if (presentNext) presentNext.addEventListener('click', function () { showSlide(currentSlide + 1); });
+      if (presentExit) presentExit.addEventListener('click', exitPresent);
     })();
   </script>
 
